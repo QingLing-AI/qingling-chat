@@ -6,16 +6,17 @@ import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 export interface ItemLinkProps {
+  hidden?: boolean;
   href: string;
   icon?: LucideIcon;
   label: string;
   value: string;
 }
 
-const ItemLink = memo<ItemLinkProps>(({ label, href }) => {
+const ItemLink = memo<ItemLinkProps>(({ label, href, hidden }) => {
   const theme = useTheme();
 
-  return (
+  return hidden ? null : (
     <Link href={href} style={{ color: 'inherit' }} target={'_blank'}>
       <Flexbox align={'center'} gap={8} horizontal>
         {label}
