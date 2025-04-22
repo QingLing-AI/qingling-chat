@@ -44,7 +44,9 @@ const Page = memo<{ mobile?: boolean }>(({ mobile }) => {
           <AboutList
             ItemRender={ItemLink}
             items={[
+              // NOTE(lsh): 隐藏官网和商务邮箱
               {
+                hidden: true,
                 href: OFFICIAL_SITE,
                 label: t('officialSite'),
                 value: 'officialSite',
@@ -55,6 +57,7 @@ const Page = memo<{ mobile?: boolean }>(({ mobile }) => {
                 value: 'support',
               },
               {
+                hidden: true,
                 href: mailTo(BRANDING_EMAIL.business),
                 label: t('mail.business'),
                 value: 'business',
@@ -63,63 +66,67 @@ const Page = memo<{ mobile?: boolean }>(({ mobile }) => {
           />
           <Divider style={{ marginBlock: 0 }} />
           {/* NOTE(lsh): 隐藏社区资讯 */}
-          {false && <> 
-          <div className={styles.title}>{t('information')}</div>
-          <AboutList
-            ItemRender={ItemCard}
-            grid
-            items={[
-              {
-                href: BLOG,
-                icon: SiRss,
-                label: t('blog'),
-                value: 'blog',
-              },
-              {
-                href: SOCIAL_URL.github,
-                icon: SiGithub,
-                label: 'GitHub',
-                value: 'feedback',
-              },
-              {
-                href: SOCIAL_URL.discord,
-                icon: SiDiscord,
-                label: 'Discord',
-                value: 'discord',
-              },
-              {
-                href: SOCIAL_URL.x,
-                icon: SiX as any,
-                label: 'X / Twitter',
-                value: 'x',
-              },
+          {false && <>
+            <div className={styles.title}>{t('information')}</div>
+            <AboutList
+              ItemRender={ItemCard}
+              grid
+              items={[
+                {
+                  href: BLOG,
+                  icon: SiRss,
+                  label: t('blog'),
+                  value: 'blog',
+                },
+                {
+                  href: SOCIAL_URL.github,
+                  icon: SiGithub,
+                  label: 'GitHub',
+                  value: 'feedback',
+                },
+                {
+                  href: SOCIAL_URL.discord,
+                  icon: SiDiscord,
+                  label: 'Discord',
+                  value: 'discord',
+                },
+                {
+                  href: SOCIAL_URL.x,
+                  icon: SiX as any,
+                  label: 'X / Twitter',
+                  value: 'x',
+                },
 
-              {
-                href: SOCIAL_URL.medium,
-                icon: SiMedium,
-                label: 'Medium',
-                value: 'medium',
-              },
-            ]}
-          />
-          <Divider style={{ marginBlock: 0 }} /> 
+                {
+                  href: SOCIAL_URL.medium,
+                  icon: SiMedium,
+                  label: 'Medium',
+                  value: 'medium',
+                },
+              ]}
+            />
+            <Divider style={{ marginBlock: 0 }} />
           </>}
-          <div className={styles.title}>{t('legal')}</div>
-          <AboutList
-            ItemRender={ItemLink}
-            items={[
-              {
-                href: TERMS_URL,
-                label: t('terms'),
-                value: 'terms',
-              },
-              {
-                href: PRIVACY_URL,
-                label: t('privacy'),
-                value: 'privacy',
-              },
-            ]}
-          />
+          {/* NOTE(lsh): 隐藏法律声明 */}
+          {false && <>
+            <div className={styles.title}>{t('legal')}</div>
+            <AboutList
+              ItemRender={ItemLink}
+              items={[
+                {
+                  href: TERMS_URL,
+                  label: t('terms'),
+                  value: 'terms',
+                },
+                {
+                  href: PRIVACY_URL,
+                  label: t('privacy'),
+                  value: 'privacy',
+                },
+              ]}
+            />
+          </>
+          }
         </Flexbox>
       </Form.Group>
       <Analytics />
