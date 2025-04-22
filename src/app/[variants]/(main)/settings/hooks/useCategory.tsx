@@ -22,7 +22,7 @@ import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfi
 export const useCategory = () => {
   const { t } = useTranslation('setting');
   const mobile = useServerConfigStore((s) => s.isMobile);
-  const { showLLM, enableSTT, hideDocs } = useServerConfigStore(featureFlagsSelectors);
+  const { showLLM, enableSTT, /* hideDocs */ } = useServerConfigStore(featureFlagsSelectors);
 
   const cateItems: MenuProps['items'] = useMemo(
     () =>
@@ -86,7 +86,7 @@ export const useCategory = () => {
           key: SettingsTabs.Storage,
           label: t('tab.storage'),
         },
-        !hideDocs && {
+        {
           icon: <Icon icon={Info} />,
           key: SettingsTabs.About,
           label: t('tab.about'),
