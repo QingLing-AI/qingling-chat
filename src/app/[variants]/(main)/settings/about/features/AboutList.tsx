@@ -4,12 +4,12 @@ import { Grid } from '@lobehub/ui';
 import { FC, memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { ItemCardProps } from './ItemCard';
+import { ItemLinkProps } from './ItemLink';
 
 interface AboutListProps {
-  ItemRender: FC<ItemCardProps>;
+  ItemRender: FC<ItemLinkProps>;
   grid?: boolean;
-  items: ItemCardProps[];
+  items: ItemLinkProps[];
 }
 
 const AboutList = memo<AboutListProps>(({ grid, items, ItemRender }) => {
