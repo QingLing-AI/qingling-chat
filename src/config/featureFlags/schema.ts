@@ -46,6 +46,9 @@ export const FeatureFlagsSchema = z.object({
   // please contact us for more information: hello@lobehub.com
   commercial_hide_github: z.boolean().optional(),
   commercial_hide_docs: z.boolean().optional(),
+
+  // NOTE(lsh): add by qingling customized
+  qingling_customized: z.boolean().optional(),
 });
 
 export type IFeatureFlags = z.infer<typeof FeatureFlagsSchema>;
@@ -89,6 +92,9 @@ export const DEFAULT_FEATURE_FLAGS: IFeatureFlags = {
   // please contact us for more information: hello@lobehub.com
   commercial_hide_github: false,
   commercial_hide_docs: false,
+
+  // NOTE(lsh): add by qingling customized
+  qingling_customized: true,
 };
 
 export const mapFeatureFlagsEnvToState = (config: IFeatureFlags) => {
@@ -126,5 +132,7 @@ export const mapFeatureFlagsEnvToState = (config: IFeatureFlags) => {
 
     hideGitHub: config.commercial_hide_github,
     hideDocs: config.commercial_hide_docs,
+
+    qinglingCustomized: config.qingling_customized,
   };
 };
