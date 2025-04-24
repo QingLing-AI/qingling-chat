@@ -32,7 +32,7 @@ const HeaderAction = memo<{ className?: string }>(({ className }) => {
     s.toggleWideScreen,
   ]);
 
-  const { isAgentEditable } = useServerConfigStore(featureFlagsSelectors);
+  const { isAgentEditable, qinglingCustomized } = useServerConfigStore(featureFlagsSelectors);
 
   return (
     <Flexbox className={className} gap={4} horizontal>
@@ -45,7 +45,7 @@ const HeaderAction = memo<{ className?: string }>(({ className }) => {
           placement: 'bottom',
         }}
       />
-      <ShareButton />
+      {!qinglingCustomized && <ShareButton />}
       <ActionIcon
         icon={showAgentSettings ? PanelRightClose : PanelRightOpen}
         onClick={() => toggleConfig()}
