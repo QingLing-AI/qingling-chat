@@ -2,10 +2,11 @@ import { createEnv } from '@t3-oss/env-nextjs';
 import debug from 'debug';
 import { z } from 'zod';
 
+import { isQinglingCustomized } from '@/const/branding';
 import { EdgeConfig } from '@/server/modules/EdgeConfig';
 import { merge } from '@/utils/merge';
 
-import { DEFAULT_FEATURE_FLAGS, mapFeatureFlagsEnvToState } from './schema';
+import { DEFAULT_FEATURE_FLAGS, QINGLING_FEATURE_FLAGS, mapFeatureFlagsEnvToState } from './schema';
 import { parseFeatureFlag } from './utils/parser';
 
 const log = debug('lobe-feature-flags');
@@ -22,6 +23,13 @@ const env = createEnv({
 
 export const getServerFeatureFlagsValue = () => {
   const flags = parseFeatureFlag(env.FEATURE_FLAGS);
+
+  if (isQinglingCustomized ) {
+    return merge(
+      merge(DEFAULT_FEATURE_FLAGS, QINGLING_FEATURE_FLAGS),
+      flags
+    )
+  }
 
   const result = merge(DEFAULT_FEATURE_FLAGS, flags);
   return result;
