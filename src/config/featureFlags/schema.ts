@@ -110,6 +110,43 @@ export const DEFAULT_FEATURE_FLAGS: IFeatureFlags = {
   commercial_hide_docs: false,
 };
 
+export const QINGLING_FEATURE_FLAGS: IFeatureFlags = {
+  pin_list: false,
+
+  language_model_settings: true,
+  provider_settings: false,
+
+  openai_api_key: true,
+  openai_proxy_url: true,
+
+  create_session: false,
+  edit_agent: false,
+
+  plugins: false,
+  dalle: true,
+
+  check_updates: false,
+  welcome_suggest: false,
+  token_counter: false,
+
+  knowledge_base: true,
+  rag_eval: false,
+
+  clerk_sign_up: false,
+
+  cloud_promotion: false,
+
+  market: false,
+  speech_to_text: true,
+  changelog: false,
+
+  // the flags below can only be used with commercial license
+  // if you want to use it in the commercial usage
+  // please contact us for more information: hello@lobehub.com
+  commercial_hide_github: true,
+  commercial_hide_docs: true,
+};
+
 export const mapFeatureFlagsEnvToState = (config: IFeatureFlags, userId?: string) => {
   return {
     isAgentEditable: evaluateFeatureFlag(config.edit_agent, userId),
