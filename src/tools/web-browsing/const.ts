@@ -24,7 +24,14 @@ export const CATEGORY_ICON_MAP: Record<string, any> = {
   videos: VideoIcon,
 };
 
-export const ENGINE_ICON_MAP: Record<string, string> = {
+const isQinglingCustomized = true
+const convertIconURL = (iconMap: Record<string, string>) => {
+  return isQinglingCustomized ? Object.fromEntries(
+    Object.entries(iconMap).map(([key, value]) => [key, value.replace(/^https:\/\//,'/engine_icons/')]),
+  ): iconMap;
+};
+
+export const ENGINE_ICON_MAP: Record<string, string> = convertIconURL({
   'arxiv': 'https://icons.duckduckgo.com/ip3/arxiv.org.ico',
   'bilibili': 'https://icons.duckduckgo.com/ip3/bilibili.com.ico',
   'bing': 'https://icons.duckduckgo.com/ip3/www.bing.com.ico',
@@ -41,7 +48,7 @@ export const ENGINE_ICON_MAP: Record<string, string> = {
   'qwant': 'https://icons.duckduckgo.com/ip3/www.qwant.com.ico',
   'sogou wechat': 'https://icons.duckduckgo.com/ip3/weixin.sogou.com.ico',
   'youtube': 'https://icons.duckduckgo.com/ip3/youtube.com.ico',
-};
+});
 
 export const CRAWL_CONTENT_LIMITED_COUNT = 25_000;
 
