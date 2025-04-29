@@ -6,6 +6,7 @@ import { Suspense, memo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
+import { appEnv } from '@/envs/app'
 import { type ActionKeys, ChatInputProvider, DesktopChatInput } from '@/features/ChatInput';
 import WideScreenContainer from '@/features/Conversation/components/WideScreenContainer';
 import { useChatStore } from '@/store/chat';
@@ -17,7 +18,17 @@ import { HotkeyEnum, KeyEnum } from '@/types/hotkey';
 import { useSend } from '../useSend';
 import MessageFromUrl from './MessageFromUrl';
 
-const leftActions: ActionKeys[] = [
+const leftActions: ActionKeys[] = appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED ? [
+  'model',
+  'search',
+  'typo',
+  'fileUpload',
+  'knowledgeBase',
+  'tools',
+  '---',
+  [/* 'params', 'history',  */'stt', 'clear'],
+  // 'mainToken',
+] : [
   'model',
   'search',
   'typo',
