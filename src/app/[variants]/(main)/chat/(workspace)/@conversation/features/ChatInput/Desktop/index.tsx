@@ -13,11 +13,22 @@ import { aiChatSelectors } from '@/store/chat/selectors';
 import { useUserStore } from '@/store/user';
 import { preferenceSelectors, settingsSelectors } from '@/store/user/selectors';
 import { HotkeyEnum, KeyEnum } from '@/types/hotkey';
+import { appEnv } from '@/envs/app'
 
 import { useSend } from '../useSend';
 import MessageFromUrl from './MessageFromUrl';
 
-const leftActions: ActionKeys[] = [
+const leftActions: ActionKeys[] = appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED ? [
+  'model',
+  'search',
+  'typo',
+  'fileUpload',
+  'knowledgeBase',
+  'tools',
+  '---',
+  [/* 'params', 'history',  */'stt', 'clear'],
+  // 'mainToken',
+] : [
   'model',
   'search',
   'typo',
