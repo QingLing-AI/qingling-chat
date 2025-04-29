@@ -114,7 +114,7 @@ export const QINGLING_FEATURE_FLAGS: IFeatureFlags = {
   pin_list: false,
 
   language_model_settings: false,
-  provider_settings: true,
+  // provider_settings: true,
 
   openai_api_key: true,
   openai_proxy_url: true,
@@ -130,11 +130,11 @@ export const QINGLING_FEATURE_FLAGS: IFeatureFlags = {
   token_counter: false,
 
   knowledge_base: true,
-  rag_eval: false,
+  // rag_eval: false,
 
   clerk_sign_up: false,
 
-  cloud_promotion: false,
+  // cloud_promotion: false,
 
   market: false,
   speech_to_text: true,
