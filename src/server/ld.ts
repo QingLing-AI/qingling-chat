@@ -104,7 +104,7 @@ export class Ld {
         'url': urlJoin(OFFICIAL_SITE, '/icon-512x512.png'),
         'width': 512,
       },
-      'name': 'LobeHub',
+      'name': 'QingLing',
       'sameAs': [SOCIAL_URL.x, SOCIAL_URL.github, SOCIAL_URL.medium, SOCIAL_URL.youtube],
       'url': OFFICIAL_SITE,
     };
