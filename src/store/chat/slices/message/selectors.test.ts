@@ -3,7 +3,7 @@ import { LobeAgentConfig } from '@lobechat/types';
 import { act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_INBOX_AVATAR } from '@/const/meta';
+import { DEFAULT_INBOX_AVATAR, DEFAULT_USER_AVATAR } from '@/const/meta';
 import { INBOX_SESSION_ID } from '@/const/session';
 import { useAgentStore } from '@/store/agent';
 import { ChatStore } from '@/store/chat';
@@ -74,7 +74,7 @@ const mockedChats = [
     content: 'Hello World',
     role: 'user',
     meta: {
-      avatar: '😀',
+      avatar: DEFAULT_USER_AVATAR,
     },
   },
   {
@@ -82,7 +82,7 @@ const mockedChats = [
     content: 'Goodbye World',
     role: 'user',
     meta: {
-      avatar: '😀',
+      avatar: DEFAULT_USER_AVATAR,
     },
   },
   {
@@ -228,7 +228,7 @@ describe('chatSelectors', () => {
           content: 'Goodbye World',
           role: 'user',
           meta: {
-            avatar: '😀',
+            avatar: DEFAULT_USER_AVATAR,
           },
         },
         {
