@@ -16,6 +16,7 @@ import { sessionMetaSelectors, sessionSelectors } from '@/store/session/selector
 import { useUserStore } from '@/store/user';
 import { userProfileSelectors } from '@/store/user/selectors';
 import { LobeGroupSession } from '@/types/session';
+import { useServerConfigStore } from '@/store/serverConfig';
 
 import ListItem from '../../ListItem';
 import CreateGroupModal from '../../Modals/CreateGroupModal';
@@ -35,6 +36,7 @@ const SessionItem = memo<SessionItemProps>(({ id }) => {
   const [active] = useSessionStore((s) => [s.activeId === id]);
   const [loading] = useChatStore((s) => [chatSelectors.isAIGenerating(s) && id === s.activeId]);
 
+  const { isQinglingCustomized } = useServerConfigStore((s) => s.serverConfig);
   const [pin, title, avatar, avatarBackground, updateAt, members, model, group, sessionType] =
     useSessionStore((s) => {
       const session = sessionSelectors.getSessionById(id)(s);
@@ -118,7 +120,7 @@ const SessionItem = memo<SessionItemProps>(({ id }) => {
   return (
     <>
       <ListItem
-        actions={actions}
+        actions={isQinglingCustomized? null : actions}
         active={active}
         addon={addon}
         avatar={sessionAvatar as any} // Fix: Bypass complex intersection type ReactNode & avatar type

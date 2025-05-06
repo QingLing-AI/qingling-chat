@@ -33,6 +33,10 @@ export interface GlobalServerConfig {
   enabledOAuthSSO?: boolean;
   image?: PartialDeep<UserImageConfig>;
   /**
+   * 启用清岭定制版本
+   */
+  isQinglingCustomized?: boolean;
+  /**
    * @deprecated
    */
   languageModel?: ServerLanguageModel;
