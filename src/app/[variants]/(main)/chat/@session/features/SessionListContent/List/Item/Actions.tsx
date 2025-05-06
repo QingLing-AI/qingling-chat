@@ -18,7 +18,6 @@ import {
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { appEnv } from '@/envs/app';
 import { isDesktop, isServerMode } from '@/const/version';
 import { configService } from '@/services/config';
 import { useGlobalStore } from '@/store/global';
@@ -172,8 +171,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, parentType
                 key: 'export',
                 label: t('export', { ns: 'common' }),
               },
-              // NOTE(lsh): 定制模式下不显示删除按钮
-          (appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED || appEnv.QINGLING_CUSTOMIZED) ? undefined : {
+            {
             danger: true,
             icon: <Icon icon={Trash} />,
             key: 'delete',
@@ -210,6 +208,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, parentType
       arrow={false}
       menu={{
         items,
+        // @ts-ignore
         onClick: ({ domEvent }) => {
           domEvent.stopPropagation();
         },

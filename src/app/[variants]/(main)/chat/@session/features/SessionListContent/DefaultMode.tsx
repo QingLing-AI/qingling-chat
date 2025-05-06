@@ -66,19 +66,21 @@ const DefaultMode = memo(() => {
     s.updateSystemStatus,
   ]);
 
+  const { isQinglingCustomized } = useServerConfigStore((s) => s.serverConfig);
+
   const items = useMemo(
     () =>
       [
         filteredPinnedSessions &&
           filteredPinnedSessions.length > 0 && {
             children: <SessionList dataSource={filteredPinnedSessions} />,
-            extra: <Actions isPinned openConfigModal={() => setConfigGroupModalOpen(true)} />,
+            extra: isQinglingCustomized ? null : <Actions isPinned openConfigModal={() => setConfigGroupModalOpen(true)} />,
             key: SessionDefaultGroup.Pinned,
             label: t('pin'),
           },
         ...(filteredCustomSessionGroups || []).map(({ id, name, children }) => ({
           children: <SessionList dataSource={children} groupId={id} />,
-          extra: (
+          extra: isQinglingCustomized ? null :(
             <Actions
               id={id}
               isCustomGroup
@@ -94,7 +96,7 @@ const DefaultMode = memo(() => {
         })),
         {
           children: <SessionList dataSource={filteredDefaultSessions || []} />,
-          extra: <Actions openConfigModal={() => setConfigGroupModalOpen(true)} />,
+          extra: isQinglingCustomized ? null : <Actions openConfigModal={() => setConfigGroupModalOpen(true)} />,
           key: SessionDefaultGroup.Default,
           label: t('defaultList'),
         },

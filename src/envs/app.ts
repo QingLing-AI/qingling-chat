@@ -101,8 +101,3 @@ export const getAppConfig = () => {
 };
 
 export const appEnv = getAppConfig();
-
-export const isQinglingCustomized =
-  typeof window === 'undefined'
-    ? appEnv.QINGLING_CUSTOMIZED
-    : appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED;

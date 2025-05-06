@@ -1,10 +1,12 @@
 import { BuiltinToolManifest } from '@lobechat/types';
 import dayjs from 'dayjs';
 
-import { isQinglingCustomized } from '@/envs/app';
+import { appEnv } from '@/envs/app';
 
 import { systemPrompt } from './systemRole';
 import { systemPrompt as systemPromptCustomized } from './systemRoleCustomized';
+
+const isQinglingCustomized = appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED;
 
 export const WebBrowsingApiName = {
   crawlMultiPages: 'crawlMultiPages',
