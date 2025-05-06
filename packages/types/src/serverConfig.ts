@@ -27,6 +27,10 @@ export interface GlobalServerConfig {
    */
   enabledOAuthSSO?: boolean;
   /**
+   * 启用清岭定制版本
+   */
+  isQinglingCustomized?: boolean;
+  /**
    * @deprecated
    */
   languageModel?: ServerLanguageModel;
