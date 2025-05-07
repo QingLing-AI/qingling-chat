@@ -16,6 +16,7 @@ import { useChatStore } from '@/store/chat';
 import { aiChatSelectors } from '@/store/chat/selectors';
 import { useSessionStore } from '@/store/session';
 import { sessionSelectors } from '@/store/session/selectors';
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 
 import { useSend, useSendGroupMessage } from '../useSend';
 
@@ -49,6 +50,7 @@ const MobileChatInput = memo(() => {
 
   const isSessionGroup = useSessionStore(sessionSelectors.isCurrentSessionGroupSession);
 
+  const { enableSTT } = useServerConfigStore(featureFlagsSelectors);
   const [mainInputSendErrorMsg, clearSendMessageError] = useChatStore((s) => [
     aiChatSelectors.isCurrentSendMessageError(s),
     s.clearSendMessageError,
@@ -59,7 +61,7 @@ const MobileChatInput = memo(() => {
         if (!instance) return;
         useChatStore.setState({ mainInputEditor: instance });
       }}
-      leftActions={leftActions}
+      leftActions={enableSTT ? leftActions : leftActions.filter((action) => action !== 'stt')}
       mobile
       onMarkdownContentChange={(content) => {
         useChatStore.setState({ inputMessage: content });
