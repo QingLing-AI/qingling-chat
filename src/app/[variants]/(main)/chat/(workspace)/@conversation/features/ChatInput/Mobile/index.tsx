@@ -14,6 +14,7 @@ import {
 import { appEnv } from '@/envs/app'
 import { useChatStore } from '@/store/chat';
 import { aiChatSelectors } from '@/store/chat/slices/aiChat/selectors';
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 
 import { useSend } from '../useSend';
 
@@ -43,6 +44,7 @@ const MobileChatInput = memo(() => {
   const { t } = useTranslation('chat');
   const { send, disabled, generating, stop } = useSend();
 
+  const { enableSTT } = useServerConfigStore(featureFlagsSelectors);
   const [mainInputSendErrorMsg, clearSendMessageError] = useChatStore((s) => [
     aiChatSelectors.isCurrentSendMessageError(s),
     s.clearSendMessageError,
@@ -53,7 +55,7 @@ const MobileChatInput = memo(() => {
         if (!instance) return;
         useChatStore.setState({ mainInputEditor: instance });
       }}
-      leftActions={leftActions}
+      leftActions={enableSTT ? leftActions : leftActions.filter((action) => action !== 'stt')}
       mobile
       onMarkdownContentChange={(content) => {
         useChatStore.setState({ inputMessage: content });
