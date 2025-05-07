@@ -133,7 +133,7 @@ export const QINGLING_FEATURE_FLAGS: IFeatureFlags = {
   // cloud_promotion: false,
 
   market: false,
-  speech_to_text: true,
+  speech_to_text: false,
   changelog: false,
 
   // the flags below can only be used with commercial license

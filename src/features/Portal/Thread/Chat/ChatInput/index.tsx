@@ -11,6 +11,7 @@ import WideScreenContainer from '@/features/Conversation/components/WideScreenCo
 import { useChatStore } from '@/store/chat';
 import { useGlobalStore } from '@/store/global';
 import { systemStatusSelectors } from '@/store/global/selectors';
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 
 import { useSendThreadMessage } from './useSend';
 
@@ -23,6 +24,7 @@ const Desktop = memo(() => {
   ]);
 
   const { send, disabled, generating, stop } = useSendThreadMessage();
+  const { enableSTT } = useServerConfigStore(featureFlagsSelectors);
 
   return (
     <WideScreenContainer>
@@ -54,7 +56,7 @@ const Desktop = memo(() => {
           if (!instance) return;
           useChatStore.setState({ threadInputEditor: instance });
         }}
-        leftActions={threadActions}
+        leftActions={enableSTT ? threadActions : threadActions.filter((action) => action !== 'stt')}
         onSend={() => {
           send();
         }}
