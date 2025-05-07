@@ -94,8 +94,8 @@ export const getAppConfig = () => {
       SSRF_ALLOW_IP_ADDRESS_LIST: process.env.SSRF_ALLOW_IP_ADDRESS_LIST,
       MARKET_BASE_URL: process.env.MARKET_BASE_URL,
 
-      NEXT_PUBLIC_QINGLING_CUSTOMIZED: process.env.QINGLING_CUSTOMIZED !== '0',
-      QINGLING_CUSTOMIZED: process.env.QINGLING_CUSTOMIZED !== '0',
+      NEXT_PUBLIC_QINGLING_CUSTOMIZED: process.env.QINGLING_CUSTOMIZED === '1',
+      QINGLING_CUSTOMIZED: process.env.QINGLING_CUSTOMIZED === '1',
     },
   });
 };
