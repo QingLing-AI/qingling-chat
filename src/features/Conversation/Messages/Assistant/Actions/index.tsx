@@ -1,3 +1,5 @@
+'use client';
+
 import { ActionIconGroup, type ActionIconGroupEvent, ActionIconGroupItemType } from '@lobehub/ui';
 import { App } from 'antd';
 import { useSearchParams } from 'next/navigation';
@@ -10,6 +12,7 @@ import { useChatStore } from '@/store/chat';
 import { threadSelectors } from '@/store/chat/selectors';
 import { useSessionStore } from '@/store/session';
 import { sessionSelectors } from '@/store/session/selectors';
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 import { ChatMessage } from '@/types/message';
 
 import { InPortalThreadContext } from '../../../context/InPortalThreadContext';
@@ -43,6 +46,8 @@ export const AssistantActionsBar = memo<AssistantActionsProps>(({ id, data, inde
     tts,
     translate,
   } = useChatListActionsBar({ hasThread });
+
+  const { enableSTT } = useServerConfigStore(featureFlagsSelectors);
 
   const hasTools = !!tools;
 
@@ -174,7 +179,7 @@ export const AssistantActionsBar = memo<AssistantActionsProps>(({ id, data, inde
             edit,
             copy,
             divider,
-            tts,
+            enableSTT ? tts : null,
             translate,
             divider,
             share,
@@ -183,7 +188,7 @@ export const AssistantActionsBar = memo<AssistantActionsProps>(({ id, data, inde
             regenerate,
             delAndRegenerate,
             del,
-          ],
+          ].filter(Boolean),
         }}
         onActionClick={onActionClick}
       />
