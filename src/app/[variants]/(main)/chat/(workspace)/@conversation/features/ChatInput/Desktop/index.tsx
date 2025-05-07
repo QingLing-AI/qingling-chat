@@ -10,6 +10,7 @@ import { type ActionKeys, ChatInputProvider, DesktopChatInput } from '@/features
 import WideScreenContainer from '@/features/Conversation/components/WideScreenContainer';
 import { useChatStore } from '@/store/chat';
 import { aiChatSelectors } from '@/store/chat/selectors';
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
 import { useUserStore } from '@/store/user';
 import { preferenceSelectors, settingsSelectors } from '@/store/user/selectors';
 import { HotkeyEnum, KeyEnum } from '@/types/hotkey';
@@ -54,6 +55,7 @@ const Desktop = memo(() => {
     aiChatSelectors.isCurrentSendMessageError(s),
     s.clearSendMessageError,
   ]);
+  const { enableSTT } = useServerConfigStore(featureFlagsSelectors);
   const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.AddUserMessage));
 
   return (
@@ -62,7 +64,7 @@ const Desktop = memo(() => {
         if (!instance) return;
         useChatStore.setState({ mainInputEditor: instance });
       }}
-      leftActions={leftActions}
+      leftActions={enableSTT ? leftActions : leftActions.filter((action) => action !== 'stt')}
       onMarkdownContentChange={(content) => {
         useChatStore.setState({ inputMessage: content });
       }}
