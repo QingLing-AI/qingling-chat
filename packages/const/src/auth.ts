@@ -1,4 +1,4 @@
-import { appEnv } from '@/envs/app';
+import { isQinglingCustomized } from '@/const/version'
 
 export const enableClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 export const enableNextAuth = process.env.NEXT_PUBLIC_ENABLE_NEXT_AUTH === '1';
@@ -9,4 +9,4 @@ export const LOBE_CHAT_OIDC_AUTH_HEADER = 'Oidc-Auth';
 
 export const OAUTH_AUTHORIZED = 'X-oauth-authorized';
 
-export const SECRET_XOR_KEY = appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED ? 'qing!ling@qingling' : 'LobeHub · LobeChat';
+export const SECRET_XOR_KEY = isQinglingCustomized ? 'qing!ling@qingling' : 'LobeHub · LobeChat';

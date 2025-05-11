@@ -1,4 +1,4 @@
-import { isDesktop } from '@/const/version';
+import { isDesktop, isQinglingCustomized } from '@/const/version';
 import { LobeBuiltinTool } from '@/types/tool';
 
 import { ArtifactsManifest } from './artifacts';
@@ -14,6 +14,7 @@ export const builtinTools: LobeBuiltinTool[] = [
     type: 'builtin',
   },
   {
+    hidden: isQinglingCustomized,
     identifier: DalleManifest.identifier,
     manifest: DalleManifest,
     type: 'builtin',
