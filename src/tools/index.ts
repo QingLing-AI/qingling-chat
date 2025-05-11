@@ -1,6 +1,6 @@
 import { LobeBuiltinTool } from '@lobechat/types';
 
-import { isDesktop } from '@/const/version';
+import { isDesktop, isQinglingCustomized } from '@/const/version';
 
 import { ArtifactsManifest } from './artifacts';
 import { CodeInterpreterManifest } from './code-interpreter';
@@ -15,6 +15,7 @@ export const builtinTools: LobeBuiltinTool[] = [
     type: 'builtin',
   },
   {
+    hidden: isQinglingCustomized,
     identifier: DalleManifest.identifier,
     manifest: DalleManifest,
     type: 'builtin',

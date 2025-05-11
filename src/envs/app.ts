@@ -33,7 +33,6 @@ export const getAppConfig = () => {
   return createEnv({
     client: {
       NEXT_PUBLIC_ENABLE_SENTRY: z.boolean(),
-      NEXT_PUBLIC_QINGLING_CUSTOMIZED: z.boolean(),
     },
     server: {
       ACCESS_CODES: z.any(z.string()).optional(),
@@ -58,8 +57,6 @@ export const getAppConfig = () => {
       SSRF_ALLOW_PRIVATE_IP_ADDRESS: z.boolean().optional(),
       SSRF_ALLOW_IP_ADDRESS_LIST: z.string().optional(),
       MARKET_BASE_URL: z.string().optional(),
-
-      QINGLING_CUSTOMIZED: z.boolean(),
     },
     runtimeEnv: {
       // Sentry
@@ -93,9 +90,6 @@ export const getAppConfig = () => {
       SSRF_ALLOW_PRIVATE_IP_ADDRESS: process.env.SSRF_ALLOW_PRIVATE_IP_ADDRESS === '1',
       SSRF_ALLOW_IP_ADDRESS_LIST: process.env.SSRF_ALLOW_IP_ADDRESS_LIST,
       MARKET_BASE_URL: process.env.MARKET_BASE_URL,
-
-      NEXT_PUBLIC_QINGLING_CUSTOMIZED: process.env.QINGLING_CUSTOMIZED === '1',
-      QINGLING_CUSTOMIZED: process.env.QINGLING_CUSTOMIZED === '1',
     },
   });
 };
