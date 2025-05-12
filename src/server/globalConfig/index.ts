@@ -1,7 +1,7 @@
 import { authEnv } from '@/config/auth';
 import { fileEnv } from '@/config/file';
 import { enableNextAuth } from '@/const/auth';
-import { isDesktop } from '@/const/version';
+import { isDesktop, isQinglingCustomized } from '@/const/version';
 import { appEnv, getAppConfig } from '@/envs/app';
 import { knowledgeEnv } from '@/envs/knowledge';
 import { langfuseEnv } from '@/envs/langfuse';
@@ -14,7 +14,7 @@ import { parseAgentConfig } from './parseDefaultAgent';
 import { parseFilesConfig } from './parseFilesConfig';
 
 export const getServerGlobalConfig = async () => {
-  const { ACCESS_CODES, DEFAULT_AGENT_CONFIG, QINGLING_CUSTOMIZED } = getAppConfig();
+  const { ACCESS_CODES, DEFAULT_AGENT_CONFIG } = getAppConfig();
 
   const config: GlobalServerConfig = {
     aiProvider: await genServerAiProvidersConfig({
@@ -58,7 +58,7 @@ export const getServerGlobalConfig = async () => {
     enabledAccessCode: ACCESS_CODES?.length > 0,
 
     enabledOAuthSSO: enableNextAuth,
-    isQinglingCustomized: QINGLING_CUSTOMIZED,
+    isQinglingCustomized: isQinglingCustomized,
     /**
      * @deprecated
      */
