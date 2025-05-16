@@ -7,7 +7,12 @@ import { enableAuth } from '@/const/auth';
 import { INBOX_GUIDE_SYSTEMROLE } from '@/const/guide';
 import { INBOX_SESSION_ID } from '@/const/session';
 import { DEFAULT_AGENT_CONFIG } from '@/const/settings';
-import { isDeprecatedEdition, isDesktop, isServerMode } from '@/const/version';
+import {
+  isDeprecatedEdition,
+  isDesktop,
+  isQinglingCustomized,
+  isServerMode,
+} from '@/const/version';
 import {
   AgentRuntimeError,
   ChatCompletionErrorPayload,
@@ -32,6 +37,7 @@ import {
   userGeneralSettingsSelectors,
   userProfileSelectors,
 } from '@/store/user/selectors';
+import { CurrentTimeManifest } from '@/tools/current-time';
 import { WebBrowsingManifest } from '@/tools/web-browsing';
 import { WorkingModel } from '@/types/agent';
 import { ChatImageItem, ChatMessage, MessageToolCall } from '@/types/message';
@@ -208,6 +214,11 @@ class ChatService {
 
     if (useApplicationBuiltinSearchTool) {
       pluginIds.push(WebBrowsingManifest.identifier);
+    }
+
+    // NOTE(lsh): if the model is qingling customized, we need to add the qingling-current-time-assistant to the pluginIds
+    if (isQinglingCustomized) {
+      pluginIds.push(CurrentTimeManifest.identifier);
     }
 
     // ============  1. preprocess placeholder variables   ============ //
@@ -653,8 +664,8 @@ class ChatService {
       // Inject Tool SystemRole
       const hasTools = tools && tools?.length > 0;
       const hasFC = hasTools && isCanUseFC(model, provider);
-      const toolsSystemRoles =
-        hasFC && toolSelectors.enabledSystemRoles(tools)(getToolStoreState());
+      // NOTE(lsh): 增加个 fc 的判断，因为目前只有 fc 才支持 tool，有些没有 api 的 tools 也是需要配置 prompts
+      const toolsSystemRoles = toolSelectors.enabledSystemRoles(tools, hasFC)(getToolStoreState());
 
       const injectSystemRoles = BuiltinSystemRolePrompts({
         historySummary: options?.historySummary,
