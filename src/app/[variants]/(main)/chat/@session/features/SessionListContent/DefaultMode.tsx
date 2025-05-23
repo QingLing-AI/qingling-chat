@@ -7,7 +7,7 @@ import { useFetchSessions } from '@/hooks/useFetchSessions';
 import { useGlobalStore } from '@/store/global';
 import { systemStatusSelectors } from '@/store/global/selectors';
 import { useServerConfigStore } from '@/store/serverConfig';
-import { serverConfigSelectors } from '@/store/serverConfig/selectors';
+import { featureFlagsSelectors, serverConfigSelectors } from '@/store/serverConfig/selectors';
 import { useSessionStore } from '@/store/session';
 import { sessionSelectors } from '@/store/session/selectors';
 import {
@@ -66,7 +66,7 @@ const DefaultMode = memo(() => {
     s.updateSystemStatus,
   ]);
 
-  const { isQinglingCustomized } = useServerConfigStore((s) => s.serverConfig);
+  const { showCreateSession } = useServerConfigStore(featureFlagsSelectors);
 
   const items = useMemo(
     () =>
@@ -74,13 +74,13 @@ const DefaultMode = memo(() => {
         filteredPinnedSessions &&
           filteredPinnedSessions.length > 0 && {
             children: <SessionList dataSource={filteredPinnedSessions} />,
-            extra: isQinglingCustomized ? null : <Actions isPinned openConfigModal={() => setConfigGroupModalOpen(true)} />,
+            extra: showCreateSession ? null : <Actions isPinned openConfigModal={() => setConfigGroupModalOpen(true)} />,
             key: SessionDefaultGroup.Pinned,
             label: t('pin'),
           },
         ...(filteredCustomSessionGroups || []).map(({ id, name, children }) => ({
           children: <SessionList dataSource={children} groupId={id} />,
-          extra: isQinglingCustomized ? null :(
+          extra: showCreateSession ? (
             <Actions
               id={id}
               isCustomGroup
@@ -90,13 +90,13 @@ const DefaultMode = memo(() => {
               openConfigModal={() => setConfigGroupModalOpen(true)}
               openRenameModal={() => setRenameGroupModalOpen(true)}
             />
-          ),
+          ) : null,
           key: id,
           label: name,
         })),
         {
           children: <SessionList dataSource={filteredDefaultSessions || []} />,
-          extra: isQinglingCustomized ? null : <Actions openConfigModal={() => setConfigGroupModalOpen(true)} />,
+          extra: showCreateSession ? <Actions openConfigModal={() => setConfigGroupModalOpen(true)} /> : null,
           key: SessionDefaultGroup.Default,
           label: t('defaultList'),
         },
