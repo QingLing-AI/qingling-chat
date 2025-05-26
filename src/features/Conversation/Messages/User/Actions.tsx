@@ -3,12 +3,13 @@ import { ActionIconGroup } from '@lobehub/ui';
 import { ActionIconGroupItemType } from '@lobehub/ui/es/ActionIconGroup';
 import { ActionIconGroupEvent } from '@lobehub/ui/es/ActionIconGroup/type';
 import { App } from 'antd';
+import isEqual from 'fast-deep-equal';
 import { useSearchParams } from 'next/navigation';
 import { memo, use, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useChatStore } from '@/store/chat';
-import { threadSelectors } from '@/store/chat/selectors';
+import { chatSelectors, threadSelectors } from '@/store/chat/selectors';
 
 import { VirtuosoContext } from '../../components/VirtualizedList/VirtuosoContext';
 import { InPortalThreadContext } from '../../context/InPortalThreadContext';
@@ -21,6 +22,7 @@ interface UserActionsProps {
 }
 
 export const UserActionsBar = memo<UserActionsProps>(({ id, data, index }) => {
+  const item = useChatStore(chatSelectors.getMessageById(id), isEqual);
   const { t } = useTranslation('common');
   const searchParams = useSearchParams();
 
@@ -34,6 +36,7 @@ export const UserActionsBar = memo<UserActionsProps>(({ id, data, index }) => {
     ttsMessage,
     delAndRegenerateMessage,
     copyMessage,
+    exportMessageDocx,
     openThreadCreator,
     resendThreadMessage,
     delAndResendThreadMessage,
@@ -48,6 +51,7 @@ export const UserActionsBar = memo<UserActionsProps>(({ id, data, index }) => {
     s.ttsMessage,
     s.delAndRegenerateMessage,
     s.copyMessage,
+    s.exportMessageDocx,
     s.openThreadCreator,
     s.resendThreadMessage,
     s.delAndResendThreadMessage,
@@ -126,6 +130,14 @@ export const UserActionsBar = memo<UserActionsProps>(({ id, data, index }) => {
 
         case 'tts': {
           ttsMessage(id);
+          break;
+        }
+
+        case 'exportDocx': {
+          if (item && item.content){
+            await exportMessageDocx(id, item.content);
+            message.success(t('exportSuccess', { defaultValue: 'Export Docx Success' }));
+          }
           break;
         }
       }
