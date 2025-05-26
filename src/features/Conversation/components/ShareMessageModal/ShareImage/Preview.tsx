@@ -6,6 +6,7 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
+import { isQinglingCustomized } from '@/const/version'
 import { ProductLogo } from '@/components/Branding';
 import { ChatItem } from '@/features/Conversation';
 import PluginTag from '@/features/PluginTag';
@@ -75,7 +76,7 @@ const Preview = memo<PreviewProps>(
             {withFooter ? (
               <Flexbox align={'center'} className={styles.footer} gap={4}>
                 <ProductLogo type={'combine'} />
-                <div className={styles.url}>{pkg.homepage}</div>
+                {isQinglingCustomized ? null : <div className={styles.url}>{pkg.homepage}</div>}
               </Flexbox>
             ) : (
               <div />
