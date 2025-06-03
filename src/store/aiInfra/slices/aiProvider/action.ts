@@ -2,7 +2,7 @@ import { uniqBy } from 'lodash-es';
 import { SWRResponse, mutate } from 'swr';
 import { StateCreator } from 'zustand/vanilla';
 
-import { isDeprecatedEdition, isDesktop, isUsePgliteDB } from '@/const/version';
+import { isDeprecatedEdition, isDesktop, isUsePgliteDB, isQinglingCustomized } from '@/const/version';
 import { useClientDataSWR } from '@/libs/swr';
 import { aiProviderService } from '@/services/aiProvider';
 import { AiInfraStore } from '@/store/aiInfra/store';
@@ -251,17 +251,17 @@ export const createAiProviderSlice: StateCreator<
           };
         }
 
-        const enabledAiProviders: EnabledProvider[] = DEFAULT_MODEL_PROVIDER_LIST.filter(
+        const enabledAiProviders: EnabledProvider[] = isQinglingCustomized ? [] : DEFAULT_MODEL_PROVIDER_LIST.filter(
           (provider) => provider.enabled,
         ).map((item) => ({ id: item.id, name: item.name, source: AiProviderSourceEnum.Builtin }));
 
-        const enabledChatAiProviders = enabledAiProviders.filter((provider) => {
+        const enabledChatAiProviders = isQinglingCustomized ? [] : enabledAiProviders.filter((provider) => {
           return builtinAiModelList.some(
             (model) => model.providerId === provider.id && model.type === 'chat',
           );
         });
 
-        const enabledImageAiProviders = enabledAiProviders
+        const enabledImageAiProviders = isQinglingCustomized ? [] : enabledAiProviders
           .filter((provider) => {
             return builtinAiModelList.some(
               (model) => model.providerId === provider.id && model.type === 'image',
@@ -270,7 +270,7 @@ export const createAiProviderSlice: StateCreator<
           .map((item) => ({ id: item.id, name: item.name, source: AiProviderSourceEnum.Builtin }));
 
         // Build model lists for non-login state as well
-        const enabledAiModels = builtinAiModelList.filter((m) => m.enabled);
+        const enabledAiModels = isQinglingCustomized ? [] : builtinAiModelList.filter((m) => m.enabled);
         const [enabledChatModelList, enabledImageModelList] = await Promise.all([
           buildProviderModelLists(enabledChatAiProviders, enabledAiModels, 'chat'),
           buildProviderModelLists(enabledImageAiProviders, enabledAiModels, 'image'),
