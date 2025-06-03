@@ -26,6 +26,7 @@ vi.mock('@lobechat/const', async (importOriginal) => {
     },
     isDeprecatedEdition: false,
     isDesktop: false,
+    isQinglingCustomized: false,
   };
 });
 
