@@ -2,7 +2,7 @@ import { uniqBy } from 'lodash-es';
 import { SWRResponse, mutate } from 'swr';
 import { StateCreator } from 'zustand/vanilla';
 
-import { isDeprecatedEdition, isDesktop, isUsePgliteDB } from '@/const/version';
+import { isDeprecatedEdition, isDesktop, isUsePgliteDB, isQinglingCustomized } from '@/const/version';
 import { useClientDataSWR } from '@/libs/swr';
 import { aiProviderService } from '@/services/aiProvider';
 import { AiInfraStore } from '@/store/aiInfra/store';
@@ -214,14 +214,15 @@ export const createAiProviderSlice: StateCreator<
         ).map((item) => ({ id: item.id, name: item.name, source: 'builtin' }));
         return {
           builtinAiModelList,
-          enabledAiModels: builtinAiModelList.filter((m) => m.enabled),
-          enabledAiProviders: enabledAiProviders,
-          enabledChatAiProviders: enabledAiProviders.filter((provider) => {
+          // NOTE(lsh): 未登录时不显示任何模型
+          enabledAiModels: isQinglingCustomized ? [] : builtinAiModelList.filter((m) => m.enabled),
+          enabledAiProviders: isQinglingCustomized ? [] : enabledAiProviders,
+          enabledChatAiProviders: isQinglingCustomized ? [] : enabledAiProviders.filter((provider) => {
             return builtinAiModelList.some(
               (model) => model.providerId === provider.id && model.type === 'chat',
             );
           }),
-          enabledImageAiProviders: enabledAiProviders
+          enabledImageAiProviders: isQinglingCustomized ? [] : enabledAiProviders
             .filter((provider) => {
               return builtinAiModelList.some(
                 (model) => model.providerId === provider.id && model.type === 'image',
