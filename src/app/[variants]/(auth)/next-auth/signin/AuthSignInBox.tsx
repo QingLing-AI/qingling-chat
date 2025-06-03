@@ -140,7 +140,7 @@ export default memo(() => {
                   loading={loadingProvider === provider}
                   onClick={() => handleSignIn(provider)}
                 >
-                  {provider}
+                  {isQinglingCustomized ? '登录' : provider}
                 </Button>
               ))
             ) : (
