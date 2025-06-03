@@ -3,7 +3,7 @@ import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['crypto', 'util', 'tty'],
+    exclude: ['crypto', 'util', 'tty', '.devcontainer'],
     include: ['@lobehub/tts'],
   },
   test: {
@@ -41,6 +41,7 @@ export default defineConfig({
     },
     environment: 'happy-dom',
     exclude: [
+      '.devcontainer/**',
       '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
