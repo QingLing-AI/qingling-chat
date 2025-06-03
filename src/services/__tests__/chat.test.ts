@@ -84,6 +84,7 @@ beforeEach(async () => {
     isServerMode: false,
     isDeprecatedEdition: true,
     isDesktop: false,
+    isQinglingCustomized: false,
   }));
 
   // Reset all mocks
