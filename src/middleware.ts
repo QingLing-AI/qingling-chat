@@ -194,6 +194,7 @@ const isProtectedRoute = createRouteMatcher([
   '/knowledge(.*)',
   '/onboard(.*)',
   '/oauth(.*)',
+  '/chat(.*)',
   // ↓ cloud ↓
 ]);
 
