@@ -1392,6 +1392,7 @@ describe('ChatService', () => {
           isServerMode: true,
           isDeprecatedEdition: false,
           isDesktop: false,
+          isQinglingCustomized: false,
         }));
 
         // 需要在修改模拟后重新导入相关模块
