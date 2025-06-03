@@ -106,3 +106,10 @@ CLAUDE.md
 
 # Misc
 ./packages/lobe-ui
+# for local prd docs
+docs/prd
+
+# for qingling
+.codebuddy
+.devcontainer
+
