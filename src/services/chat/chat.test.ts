@@ -18,7 +18,6 @@ import { ChatImageItem, ChatMessage } from '@/types/message';
 import { ChatStreamPayload, type OpenAIChatMessage } from '@/types/openai/chat';
 import { LobeTool } from '@/types/tool';
 
-import * as helpers from './helper';
 import { chatService } from './index';
 
 // Mocking external dependencies
