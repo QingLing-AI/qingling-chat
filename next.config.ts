@@ -28,6 +28,9 @@ const nextConfig: NextConfig = {
     emotion: true,
   },
   compress: isProd,
+  env: {
+    QINGLING_CUSTOMIZED: "1",
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
