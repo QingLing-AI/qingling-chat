@@ -26,6 +26,9 @@ const nextConfig: NextConfig = {
     emotion: true,
   },
   compress: isProd,
+  env: {
+    QINGLING_CUSTOMIZED: "1",
+  },
   experimental: {
     optimizePackageImports: [
       'emoji-mart',
