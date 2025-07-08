@@ -17,6 +17,8 @@ import { oidcEnv } from './envs/oidc';
 import { parseBrowserLanguage } from './utils/locale';
 import { RouteVariants } from './utils/server/routeVariants';
 
+import { getClientRequestUrl } from '@/utils/url';
+
 // Create debug logger instances
 const logDefault = debug('middleware:default');
 const logNextAuth = debug('middleware:next-auth');
@@ -138,6 +140,7 @@ const defaultMiddleware = (request: NextRequest) => {
     nextPathname: nextPathname,
     nextURL: nextURL,
     originalPathname: url.pathname,
+    url: url.href,
   });
 
   url.pathname = nextPathname;
@@ -238,8 +241,9 @@ const nextAuthMiddleware = NextAuth.auth((req) => {
     // ref: https://authjs.dev/getting-started/session-management/protecting
     if (isProtected) {
       logNextAuth('Request a protected route, redirecting to sign-in page');
-      const nextLoginUrl = new URL('/next-auth/signin', req.nextUrl.origin);
-      nextLoginUrl.searchParams.set('callbackUrl', req.nextUrl.href);
+      const realUrl = getClientRequestUrl(req)
+      const nextLoginUrl = new URL('/next-auth/signin', realUrl.origin);
+      nextLoginUrl.searchParams.set('callbackUrl', realUrl.href);
       const hl = req.nextUrl.searchParams.get('hl');
       if (hl) {
         nextLoginUrl.searchParams.set('hl', hl);

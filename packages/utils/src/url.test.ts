@@ -6,7 +6,82 @@ import {
   isDesktopLocalStaticServerUrl,
   isLocalOrPrivateUrl,
   pathString,
+  getClientRequestUrl,
 } from './url';
+import { NextRequest } from 'next/server';
+
+
+describe('getClientRequestUrl', () => {
+  it('当x-forwarded-host和x-forwarded-proto存在时，应使用它们构建URL', () => {
+    const req = {
+      headers: {
+        get: (name: string) => {
+          if (name === 'x-forwarded-host') return 'example.com';
+          if (name === 'x-forwarded-proto') return 'https';
+          return null;
+        },
+      },
+      nextUrl: {
+        pathname: '/test',
+        toString: () => 'https://default.com/test',
+      },
+    } as unknown as NextRequest;
+
+    const url = getClientRequestUrl(req);
+    expect(url.toString()).toBe('https://example.com/test');
+  });
+
+  it('当x-forwarded-host和x-forwarded-proto不存在时，应返回nextUrl', () => {
+    const req = {
+      headers: {
+        get: () => null,
+      },
+      nextUrl: {
+        pathname: '/test',
+        toString: () => 'https://default.com/test',
+      },
+    } as unknown as NextRequest;
+
+    const url = getClientRequestUrl(req);
+    expect(url.toString()).toBe('https://default.com/test');
+  });
+
+  it('当x-forwarded-host存在但x-forwarded-proto不存在时，应返回nextUrl', () => {
+    const req = {
+      headers: {
+        get: (name: string) => {
+          if (name === 'x-forwarded-host') return 'example.com';
+          return null;
+        },
+      },
+      nextUrl: {
+        pathname: '/test',
+        toString: () => 'https://default.com/test',
+      },
+    } as unknown as NextRequest;
+
+    const url = getClientRequestUrl(req);
+    expect(url.toString()).toBe('https://default.com/test');
+  });
+
+  it('当x-forwarded-host不存在但x-forwarded-proto存在时，应返回nextUrl', () => {
+    const req = {
+      headers: {
+        get: (name: string) => {
+          if (name === 'x-forwarded-proto') return 'https';
+          return null;
+        },
+      },
+      nextUrl: {
+        pathname: '/test',
+        toString: () => 'https://default.com/test',
+      },
+    } as unknown as NextRequest;
+
+    const url = getClientRequestUrl(req);
+    expect(url.toString()).toBe('https://default.com/test');
+  });
+});
 
 describe('pathString', () => {
   it('should handle basic path', () => {
