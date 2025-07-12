@@ -1,6 +1,7 @@
 import { LobeBuiltinTool } from '@lobechat/types';
 
-import { isDesktop, isQinglingCustomized } from '@/const/version';
+import { isDesktop } from '@/const/version';
+import { isQinglingCustomized } from '@/const/branding';
 
 import { ArtifactsManifest } from './artifacts';
 import { CodeInterpreterManifest } from './code-interpreter';

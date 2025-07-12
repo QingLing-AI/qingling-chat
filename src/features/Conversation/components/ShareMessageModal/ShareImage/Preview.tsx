@@ -6,7 +6,8 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
-import { isQinglingCustomized } from '@/const/version'
+import { isQinglingCustomized } from '@/const/branding';
+
 import { ProductLogo } from '@/components/Branding';
 import { ChatItem } from '@/features/Conversation';
 import PluginTag from '@/features/PluginTag';
