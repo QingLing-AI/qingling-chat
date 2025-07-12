@@ -41,7 +41,6 @@ import { ChatStreamPayload, type OpenAIChatMessage } from '@/types/openai/chat';
 import { LobeTool } from '@/types/tool';
 
 import { chatService, initializeWithClientStore } from '../chat';
-import { isQinglingCustomized } from '@/const/version';
 
 // Mocking external dependencies
 vi.mock('i18next', () => ({
@@ -85,7 +84,6 @@ beforeEach(async () => {
     isServerMode: false,
     isDeprecatedEdition: true,
     isDesktop: false,
-    isQinglingCustomized: false,
   }));
 
   // Reset all mocks
@@ -1393,7 +1391,6 @@ describe('ChatService', () => {
           isServerMode: true,
           isDeprecatedEdition: false,
           isDesktop: false,
-          isQinglingCustomized: false,
         }));
 
         // 需要在修改模拟后重新导入相关模块
@@ -1494,7 +1491,6 @@ describe('ChatService', () => {
           isServerMode: true,
           isDeprecatedEdition: true,
           isDesktop: false,
-          isQinglingCustomized: false,
         }));
 
         // 需要在修改模拟后重新导入相关模块
