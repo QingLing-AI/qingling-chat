@@ -1,5 +1,6 @@
 import { enableNextAuth } from '@/const/auth';
-import { isDesktop, isQinglingCustomized } from '@/const/version';
+import { isQinglingCustomized } from '@/const/branding';
+import { isDesktop } from '@/const/version';
 import { appEnv, getAppConfig } from '@/envs/app';
 import { authEnv } from '@/envs/auth';
 import { fileEnv } from '@/envs/file';

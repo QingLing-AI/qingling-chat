@@ -1,7 +1,7 @@
 import { BuiltinToolManifest } from '@lobechat/types';
 import dayjs from 'dayjs';
 
-import { isQinglingCustomized } from '@/const/version';
+import { isQinglingCustomized } from '@/const/branding';
 
 import { systemPrompt } from './systemRole';
 import { systemPrompt as systemPromptCustomized } from './systemRoleCustomized';

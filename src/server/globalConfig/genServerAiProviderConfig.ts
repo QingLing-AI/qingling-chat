@@ -5,7 +5,7 @@ import * as AiModels from 'model-bank';
 
 import { getLLMConfig } from '@/envs/llm';
 
-import { isQinglingCustomized } from '@/const/version';
+import { isQinglingCustomized } from '@/const/branding';
 
 interface ProviderSpecificConfig {
   enabled?: boolean;
