@@ -1,5 +1,5 @@
 import { authEnv } from '@/envs/auth';
-import { isQinglingCustomized } from '@/const/version'
+import { isQinglingCustomized } from '@/const/branding'
 
 export const enableClerk = authEnv.NEXT_PUBLIC_ENABLE_CLERK_AUTH;
 export const enableNextAuth = authEnv.NEXT_PUBLIC_ENABLE_NEXT_AUTH;
