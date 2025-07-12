@@ -7,10 +7,10 @@ import { enableAuth } from '@/const/auth';
 import { INBOX_GUIDE_SYSTEMROLE } from '@/const/guide';
 import { INBOX_SESSION_ID } from '@/const/session';
 import { DEFAULT_AGENT_CONFIG } from '@/const/settings';
+import { isQinglingCustomized } from '@/const/branding';
 import {
   isDeprecatedEdition,
   isDesktop,
-  isQinglingCustomized,
   isServerMode,
 } from '@/const/version';
 import {
