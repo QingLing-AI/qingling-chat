@@ -6,7 +6,7 @@ import { AiFullModelCard } from 'model-bank';
 
 import { getLLMConfig } from '@/config/llm';
 
-import { isQinglingCustomized } from '@/const/version';
+import { isQinglingCustomized } from '@/const/branding';
 
 interface ProviderSpecificConfig {
   enabled?: boolean;
