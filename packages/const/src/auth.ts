@@ -1,4 +1,4 @@
-import { isQinglingCustomized } from '@/const/version'
+import { isQinglingCustomized } from '@/const/branding'
 
 export const enableClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 export const enableNextAuth = process.env.NEXT_PUBLIC_ENABLE_NEXT_AUTH === '1';
