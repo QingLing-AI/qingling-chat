@@ -1,10 +1,11 @@
 import { ClientSecretPayload } from '@lobechat/types';
-import { createTRPCClient, httpLink } from '@trpc/client';
+import { createTRPCClient, httpLink, loggerLink } from '@trpc/client';
 import superjson from 'superjson';
 import urlJoin from 'url-join';
 
 import { serverDBEnv } from '@/config/db';
 import { LOBE_CHAT_AUTH_HEADER } from '@/const/auth';
+import { isQinglingCustomized } from '@/const/branding';
 import { isDesktop } from '@/const/version';
 import { appEnv } from '@/envs/app';
 import { createAsyncCallerFactory } from '@/libs/trpc/async';
@@ -27,6 +28,12 @@ export const createAsyncServerClient = async (userId: string, payload: ClientSec
 
   const client = createTRPCClient<AsyncRouter>({
     links: [
+      loggerLink({
+        enabled: (opts) =>
+          (isQinglingCustomized && process.env.NODE_ENV === 'development' &&
+            typeof window !== 'undefined') ||
+          (opts.direction === 'down' && opts.result instanceof Error),
+      }),
       httpLink({
         headers,
         transformer: superjson,
@@ -82,7 +89,7 @@ export const createAsyncCaller = async (
     const httpClient = await createAsyncServerClient(userId, jwtPayload);
     const createRecursiveProxy = (client: any, path: string[]): any => {
       // The target is a dummy function, so that 'apply' can be triggered.
-      return new Proxy(() => {}, {
+      return new Proxy(() => { }, {
         apply: (target, thisArg, args) => {
           // 'apply' is triggered by the function call `(...)`.
           // The `path` at this point is the full path to the procedure.
