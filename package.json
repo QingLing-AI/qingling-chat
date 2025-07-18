@@ -30,10 +30,11 @@
     "e2e"
   ],
   "scripts": {
-    "prebuild": "tsx scripts/prebuild.mts && npm run lint",
+    "prebuild": "npm run build-public && tsx scripts/prebuild.mts && npm run lint",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=6144 next build",
     "postbuild": "npm run build-sitemap && npm run build-migrate-db",
     "build-migrate-db": "bun run db:migrate",
+    "build-public": "tsx ./scripts/buildPublicIndex/index.ts",
     "build-sitemap": "tsx ./scripts/buildSitemapIndex/index.ts",
     "build:analyze": "NODE_OPTIONS=--max-old-space-size=6144 ANALYZE=true next build",
     "build:docker": "npm run prebuild && NODE_OPTIONS=--max-old-space-size=6144 DOCKER=true next build && npm run build-sitemap",
@@ -249,6 +250,7 @@
     "ollama": "^0.6.0",
     "openai": "^4.104.0",
     "openapi-fetch": "^0.14.0",
+    "pacote": "^21.0.0",
     "partial-json": "^0.1.7",
     "path-browserify-esm": "^1.0.6",
     "pdf-parse": "^1.1.1",
@@ -336,6 +338,7 @@
     "@types/numeral": "^2.0.5",
     "@types/oidc-provider": "^9.5.0",
     "@types/pdfkit": "^0.17.3",
+    "@types/pacote": "^11.1.8",
     "@types/pg": "^8.15.5",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",

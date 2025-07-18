@@ -43,6 +43,12 @@ tmp/
 venv/
 .venv/
 
+# Qingling files
+.codebuddy
+.devcontainer
+public/agents-index
+public/plugins-index
+
 # Dependencies
 node_modules/
 *.lock
