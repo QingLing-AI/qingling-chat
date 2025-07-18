@@ -115,4 +115,5 @@ docs/prd
 # for qingling
 .codebuddy
 .devcontainer
-
+public/agents-index
+public/plugins-index
