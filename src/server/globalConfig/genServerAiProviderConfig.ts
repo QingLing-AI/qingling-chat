@@ -6,8 +6,6 @@ import { AiFullModelCard } from '@/types/aiModel';
 import { ProviderConfig } from '@/types/user/settings';
 import { extractEnabledModels, transformToAiModelList } from '@/utils/parseModels';
 
-import { isQinglingCustomized } from '@/const/branding';
-
 interface ProviderSpecificConfig {
   enabled?: boolean;
   enabledKey?: string;
@@ -49,11 +47,10 @@ export const genServerAiProvidersConfig = async (
 
       return {
         config: {
-          enabled: isQinglingCustomized ? (llmConfig[providerConfig.enabledKey || `ENABLED_${providerUpperCase}`]) : (
+          enabled:
             typeof providerConfig.enabled !== 'undefined'
               ? providerConfig.enabled
-              : llmConfig[providerConfig.enabledKey || `ENABLED_${providerUpperCase}`]
-          ),
+              : llmConfig[providerConfig.enabledKey || `ENABLED_${providerUpperCase}`],
           enabledModels,
           serverModelLists,
           ...(providerConfig.fetchOnClient !== undefined && {
