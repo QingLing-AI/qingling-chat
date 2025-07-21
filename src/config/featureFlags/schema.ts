@@ -124,6 +124,7 @@ export const QINGLING_FEATURE_FLAGS: IFeatureFlags = {
 
   plugins: false,
   dalle: true,
+  ai_image: false,
 
   check_updates: false,
   welcome_suggest: false,
