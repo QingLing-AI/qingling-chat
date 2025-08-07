@@ -199,6 +199,9 @@ export class AiInfraRepos {
     const builtinModelList = await pMap(
       enabledProviders,
       async (provider) => {
+        // return empty array if provider is disabled
+        if (filterEnabled && !provider.enabled) return [];
+
         const aiModels = await this.fetchBuiltinModels(provider.id);
         return (aiModels || [])
           .map<EnabledAiModel & { enabled?: boolean | null }>((item) => {
@@ -254,7 +257,7 @@ export class AiInfraRepos {
     const [result, enabledAiProviders, allModels] = await Promise.all([
       this.aiProviderModel.getAiProviderRuntimeConfig(decryptor),
       this.getUserEnabledProviderList(),
-      this.getEnabledModels(false),
+      this.getEnabledModels(true),
     ]);
 
     const runtimeConfig = result;
