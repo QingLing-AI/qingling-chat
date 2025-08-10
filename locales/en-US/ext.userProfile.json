@@ -1,0 +1,40 @@
+{
+  "ProfileManager": {
+    "actions": {
+      "confirmDelete": "Are you sure you want to delete this profile? Once deleted, it cannot be recovered.",
+      "confirmDeleteMultiProfiles": "Are you sure you want to delete the selected {{count}} profiles? Once deleted, they cannot be recovered.",
+      "createNew": "Create User Profile",
+      "deleteSuccess": "Successfully deleted"
+    },
+    "bottom": "That's the bottom",
+    "title": {
+      "createdAt": "Creation Time",
+      "name": "Name",
+      "profile": "Profile"
+    },
+    "total": {
+      "fileCount": "Total {{count}} items",
+      "selectedCount": "Selected {{count}} items"
+    }
+  },
+  "createNew": {
+    "confirm": "New",
+    "formTitle": "Basic Information",
+    "name": {
+      "placeholder": "User Name",
+      "required": "Please enter user name"
+    },
+    "profile": {
+      "placeholder": "User Profile",
+      "required": "Please enter user profile"
+    },
+    "title": "New User Profile"
+  },
+  "emptyStatus": {
+    "actions": {
+      "profile": "Create User Profile"
+    },
+    "title": "No user profiles have been created yet"
+  },
+  "title": "User Profile"
+}

@@ -336,6 +336,7 @@ export default {
     files: '文件',
     me: '我',
     setting: '设置',
+    userProfile: '用户画像',
   },
   telemetry: {
     allow: '允许',
