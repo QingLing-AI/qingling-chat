@@ -34,6 +34,7 @@ export const config = {
     '/',
     '/discover',
     '/discover(.*)',
+    '/ext.(.*)',
     '/chat',
     '/chat(.*)',
     '/changelog(.*)',

@@ -28,6 +28,8 @@ import { threadRouter } from './thread';
 import { topicRouter } from './topic';
 import { userRouter } from './user';
 
+import { extRouter } from './ext'
+
 export const lambdaRouter = router({
   agent: agentRouter,
   aiModel: aiModelRouter,
@@ -54,6 +56,9 @@ export const lambdaRouter = router({
   thread: threadRouter,
   topic: topicRouter,
   user: userRouter,
+
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
+  ext: extRouter,
 });
 
 export type LambdaRouter = typeof lambdaRouter;
