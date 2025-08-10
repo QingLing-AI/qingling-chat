@@ -338,6 +338,7 @@ export default {
     knowledgeBase: '知识库',
     me: '我',
     setting: '设置',
+    userProfile: '用户画像',
   },
   telemetry: {
     allow: '允许',

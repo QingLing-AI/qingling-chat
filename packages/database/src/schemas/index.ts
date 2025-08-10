@@ -17,3 +17,6 @@ export * from './session';
 export * from './topic';
 export * from './user';
 export * from './userMemories';
+
+// eslint-disable-next-line simple-import-sort/exports
+export * from './ext';
