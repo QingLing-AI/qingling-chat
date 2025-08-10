@@ -29,6 +29,8 @@ import tool from './tool';
 import topic from './topic';
 import welcome from './welcome';
 
+import ext from './ext'
+
 const resources = {
   auth,
   changelog,
@@ -60,6 +62,9 @@ const resources = {
   tool,
   topic,
   welcome,
+
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
+  ...ext,
 } as const;
 
 export default resources;
