@@ -25,7 +25,7 @@ module.exports = defineConfig({
   ],
   temperature: 0,
   saveImmediately: true,
-  modelName: 'chatgpt-4o-latest',
+  modelName: process.env.i18nModelName || 'chatgpt-4o-latest',
   experimental: {
     jsonMode: true,
   },
