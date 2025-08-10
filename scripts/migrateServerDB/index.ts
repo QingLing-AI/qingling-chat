@@ -11,6 +11,7 @@ import { DB_FAIL_INIT_HINT, PGVECTOR_HINT } from './errorHint';
 dotenv.config();
 
 const migrationsFolder = join(__dirname, '../../packages/database/migrations');
+const qinglingMigrationsFolder = join(__dirname, '../../packages/database/migrations/ext');
 
 const isDesktop = process.env.NEXT_PUBLIC_IS_DESKTOP_APP === '1';
 
@@ -21,6 +22,14 @@ const runMigrations = async () => {
     await nodeMigrate(serverDB, { migrationsFolder });
   } else {
     await neonMigrate(serverDB, { migrationsFolder });
+  }
+
+  if (process.env.NEXT_PUBLIC_QINGLING_CUSTOMIZED === '1') {
+    if (process.env.DATABASE_DRIVER === 'node') {
+      await nodeMigrate(serverDB, { migrationsFolder: qinglingMigrationsFolder });
+    } else {
+      await neonMigrate(serverDB, { migrationsFolder: qinglingMigrationsFolder });
+    }
   }
 
   console.log('✅ database migration pass.');
@@ -47,6 +56,7 @@ if (!isDesktop && connectionString) {
     // eslint-disable-next-line unicorn/no-process-exit
     process.exit(1);
   });
+
 } else {
   console.log('🟢 not find database env or in desktop mode, migration skipped');
 }
