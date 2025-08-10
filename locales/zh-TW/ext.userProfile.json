@@ -1,0 +1,42 @@
+{
+  "ProfileManager": {
+    "actions": {
+      "confirmDelete": "即將刪除該圖像，刪除後將無法找回，請確認你的操作",
+      "confirmDeleteMultiProfiles": "即將刪除選中的 {{count}} 個畫像，刪除後將無法找回，請確認你的操作",
+      "createNew": "建立用戶畫像",
+      "deleteSuccess": "刪除成功"
+    },
+    "bottom": "已經到底啦",
+    "title": {
+      "createdAt": "創建時間",
+      "name": "名稱",
+      "profile": "畫像"
+    },
+    "total": {
+      "fileCount": "共 {{count}} 項",
+      "selectedCount": "已選 {{count}} 項"
+    }
+  },
+  "_comment": "This is a comment",
+  "createNew": {
+    "confirm": "新建",
+    "formTitle": "基本信息",
+    "name": {
+      "placeholder": "用戶名稱",
+      "required": "請填寫用戶名稱"
+    },
+    "profile": {
+      "placeholder": "用戶簡介",
+      "required": "請填寫用戶簡介"
+    },
+    "title": "新建用戶畫像"
+  },
+  "emptyStatus": {
+    "actions": {
+      "profile": "建立用戶資料"
+    },
+    "title": "尚未建立任何用戶資料"
+  },
+  "title": "用戶畫像",
+  "translation": {}
+}
