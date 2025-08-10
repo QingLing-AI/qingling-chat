@@ -18,6 +18,13 @@ const runMigrations = async () => {
     migrationsFolder: join(__dirname, './migrations'),
   });
 
+  if (process.env.NEXT_PUBLIC_QINGLING_CUSTOMIZED === '1') {
+    console.log('[Database] Start to migration customized...');
+    await migrator.migrate(db, {
+      migrationsFolder: join(__dirname, './migrations/ext'),
+    });
+  }
+
   console.log('✅ database migration pass.');
   console.log('-------------------------------------');
   // eslint-disable-next-line unicorn/no-process-exit

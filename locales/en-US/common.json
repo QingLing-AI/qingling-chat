@@ -153,6 +153,8 @@
   "duplicate": "Create Duplicate",
   "edit": "Edit",
   "export": "Export Configuration",
+  "exportDocx": "Export to Word Document",
+  "exportSuccess": "Export successful",
   "exportType": {
     "agent": "Export Assistant Settings",
     "agentWithMessage": "Export Assistant and Messages",
@@ -338,7 +340,8 @@
     "discover": "Discover",
     "files": "Files",
     "me": "Me",
-    "setting": "Settings"
+    "setting": "Settings",
+    "userProfile": "User Profile"
   },
   "telemetry": {
     "allow": "Allow",
@@ -369,6 +372,7 @@
     "feedback": "Feedback and Suggestions",
     "help": "Help Center",
     "moveGuide": "The settings button has been moved here",
+    "network": "Network Settings",
     "plans": "Subscription Plans",
     "profile": "Account",
     "setting": "Settings",
