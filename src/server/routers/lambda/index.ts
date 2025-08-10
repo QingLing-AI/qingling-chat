@@ -32,6 +32,8 @@ import { topicRouter } from './topic';
 import { uploadRouter } from './upload';
 import { userRouter } from './user';
 
+import { extRouter } from './ext'
+
 export const lambdaRouter = router({
   agent: agentRouter,
   aiChat: aiChatRouter,
@@ -62,6 +64,9 @@ export const lambdaRouter = router({
   topic: topicRouter,
   upload: uploadRouter,
   user: userRouter,
+
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
+  ext: extRouter,
 });
 
 export type LambdaRouter = typeof lambdaRouter;

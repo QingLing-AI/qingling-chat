@@ -152,7 +152,10 @@
   "download": "下載",
   "duplicate": "建立副本",
   "edit": "編輯",
+  "error": "無法翻譯空文件。",
   "export": "匯出設定",
+  "exportDocx": "匯出為 Word 文件",
+  "exportSuccess": "導出成功",
   "exportType": {
     "agent": "匯出助手設定",
     "agentWithMessage": "匯出助手和訊息",
@@ -300,6 +303,7 @@
   "setting": "設定",
   "share": "分享",
   "stop": "停止",
+  "success": "成功",
   "sync": {
     "actions": {
       "settings": "同步設定",
@@ -340,7 +344,8 @@
     "files": "檔案",
     "knowledgeBase": "知識庫",
     "me": "我",
-    "setting": "設定"
+    "setting": "設定",
+    "userProfile": "用戶畫像"
   },
   "telemetry": {
     "allow": "允許",
@@ -371,6 +376,7 @@
     "feedback": "反饋與建議",
     "help": "幫助中心",
     "moveGuide": "設置按鈕搬到這裡啦",
+    "network": "網路設定",
     "plans": "訂閱方案",
     "profile": "帳戶管理",
     "setting": "應用設定",
