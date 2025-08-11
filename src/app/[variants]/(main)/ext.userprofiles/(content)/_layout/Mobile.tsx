@@ -4,7 +4,7 @@ import { createStyles } from 'antd-style';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { useShowMobileWorkspace } from '@/hooks/useShowMobileWorkspace';
+// import { useShowMobileWorkspace } from '@/hooks/useShowMobileWorkspace';
 
 import { LayoutProps } from './type';
 
@@ -16,29 +16,19 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-const Layout = memo<LayoutProps>(({ children, menu }) => {
-  const showMobileWorkspace = useShowMobileWorkspace();
+const Layout = memo<LayoutProps>(({ children }) => {
+  // const showMobileWorkspace = useShowMobileWorkspace();
   const { styles } = useStyles();
 
   return (
-    <>
-      <Flexbox
-        className={styles.main}
-        height="100%"
-        style={showMobileWorkspace ? { display: 'none' } : undefined}
-        width="100%"
-      >
-        {menu}
-      </Flexbox>
-      <Flexbox
-        className={styles.main}
-        height="100%"
-        style={showMobileWorkspace ? undefined : { display: 'none' }}
-        width="100%"
-      >
-        {children}
-      </Flexbox>
-    </>
+    <Flexbox
+      className={styles.main}
+      height="100%"
+      // style={showMobileWorkspace ? undefined : { display: 'none' }}
+      width="100%"
+    >
+      {children}
+    </Flexbox>
   );
 });
 
