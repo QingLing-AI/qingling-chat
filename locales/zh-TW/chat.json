@@ -291,5 +291,9 @@
       }
     }
   },
+  "userProfile": {
+    "clearProfile": "關閉用戶畫像",
+    "title": "用戶畫像"
+  },
   "zenMode": "專注模式"
 }
