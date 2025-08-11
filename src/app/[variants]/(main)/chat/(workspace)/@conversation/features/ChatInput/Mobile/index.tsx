@@ -11,7 +11,7 @@ import {
   MobileChatInput as ChatInput,
   ChatInputProvider,
 } from '@/features/ChatInput';
-import { appEnv } from '@/envs/app'
+import { isQinglingCustomized } from '@/const/branding'
 import { useChatStore } from '@/store/chat';
 import { aiChatSelectors } from '@/store/chat/selectors';
 import { useSessionStore } from '@/store/session';
@@ -20,7 +20,7 @@ import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfi
 
 import { useSend, useSendGroupMessage } from '../useSend';
 
-const leftActions: ActionKeys[] = appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED ? [
+const leftActions: ActionKeys[] = isQinglingCustomized ? [
   'model',
   'search',
   'fileUpload',

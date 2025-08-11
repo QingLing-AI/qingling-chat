@@ -5,6 +5,7 @@ import { KnowledgeBaseItem } from '../knowledgeBase';
 import { FewShots } from '../llm';
 import { LobeAgentChatConfig } from './chatConfig';
 import { LobeAgentTTSConfig } from './tts';
+import { UserProfileItem } from '../ext/userProfile';
 
 export interface LobeAgentConfig {
   chatConfig: LobeAgentChatConfig;
@@ -58,6 +59,12 @@ export interface LobeAgentConfig {
    * Flag for assistants generated automatically (e.g., from templates)
    */
   virtual?: boolean;
+  /**
+   * NOTE(lsh): add for qingling
+   * 用户画像
+   */
+  // eslint-disable-next-line typescript-sort-keys/interface
+  extUserProfile?: UserProfileItem
 }
 
 export type LobeAgentConfigKeys =

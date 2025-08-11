@@ -44,6 +44,15 @@ class AgentService {
   getFilesAndKnowledgeBases = async (agentId: string) => {
     return lambdaClient.agent.getKnowledgeBasesAndFiles.query({ agentId });
   };
+
+  // NOTE(lsh): add for qingling
+  setAgentExtUserProfile = async (agentId: string, profileId: string | null) => {
+    return lambdaClient.agent.setAgentExtUserProfile.mutate({ agentId, profileId });
+  };
+  // NOTE(lsh): add for qingling
+  getAgentExtUserProfile = async (agentId: string) => {
+    return lambdaClient.agent.getAgentExtUserProfile.query({ agentId });
+  };
 }
 
 export const agentService = new AgentService();

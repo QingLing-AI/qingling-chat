@@ -11,6 +11,7 @@ import { pino } from '@/libs/logger';
 import { authedProcedure, router } from '@/libs/trpc/lambda';
 import { serverDatabase } from '@/libs/trpc/lambda/middleware';
 import { AgentService } from '@/server/services/agent';
+import { UserProfileItem } from '@/types/ext/userProfile';
 
 const agentProcedure = authedProcedure.use(serverDatabase).use(async (opts) => {
   const { ctx } = opts;
@@ -168,5 +169,27 @@ export const agentRouter = router({
         input.knowledgeBaseId,
         input.enabled,
       );
+    }),
+
+  // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+  getAgentExtUserProfile: agentProcedure
+    .input(
+      z.object({
+        agentId: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }): Promise<UserProfileItem | null> => {
+      return ctx.agentModel.getAgentExtUserProfile(input.agentId);
+    }),
+
+  setAgentExtUserProfile: agentProcedure
+    .input(
+      z.object({
+        agentId: z.string(),
+        profileId: z.string().nullable(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      return ctx.agentModel.setAgentExtUserProfile(input.agentId, input.profileId);
     }),
 });

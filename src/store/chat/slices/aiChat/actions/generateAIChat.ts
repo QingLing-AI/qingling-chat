@@ -15,10 +15,11 @@ import { t } from 'i18next';
 import { produce } from 'immer';
 import { StateCreator } from 'zustand/vanilla';
 
+import { isQinglingCustomized } from '@/const/branding';
 import { chatService } from '@/services/chat';
 import { messageService } from '@/services/message';
 import { useAgentStore } from '@/store/agent';
-import { agentChatConfigSelectors, agentSelectors } from '@/store/agent/selectors';
+import { agentChatConfigSelectors, agentSelectors, extUserProfileSelectors } from '@/store/agent/selectors';
 import { getAgentStoreState } from '@/store/agent/store';
 import { aiModelSelectors, aiProviderSelectors } from '@/store/aiInfra';
 import { getAiInfraStoreState } from '@/store/aiInfra/store';
@@ -30,6 +31,7 @@ import { WebBrowsingManifest } from '@/tools/web-browsing';
 import { Action, setNamespace } from '@/utils/storeDebug';
 
 import { chatSelectors, topicSelectors } from '../../../selectors';
+import { userProfilePrompts } from '@/prompts/ext';
 
 const n = setNamespace('ai');
 
@@ -358,6 +360,18 @@ export const generateAIChat: StateCreator<
       });
 
       fileChunks = chunks.map((c) => ({ id: c.id, similarity: c.similarity }));
+    }
+
+    if (isQinglingCustomized) {
+      const userProfile = extUserProfileSelectors.currentAgentExtUserProfile(getAgentStoreState())
+      if (userProfile) {
+        const prevMsg = messages.pop() as UIChatMessage;
+        const userProfileContext = userProfilePrompts(userProfile);
+        messages.push({
+          ...prevMsg,
+          content: (prevMsg.content + '\n\n' + userProfileContext).trim(),
+        });
+      }
     }
 
     // 2. Add an empty message to place the AI response

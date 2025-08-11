@@ -54,6 +54,10 @@ export interface AgentChatAction {
     isLogin: boolean | undefined,
     defaultAgentConfig?: PartialDeep<LobeAgentConfig>,
   ) => SWRResponse<PartialDeep<LobeAgentConfig>>;
+
+  // NOTE(lsh): add for qingling
+  // eslint-disable-next-line typescript-sort-keys/interface
+  setActiveExtUserProfile: (id: string | null) => Promise<void>;
 }
 
 const FETCH_AGENT_CONFIG_KEY = 'FETCH_AGENT_CONFIG';
@@ -213,6 +217,18 @@ export const createChatSlice: StateCreator<
         },
       },
     ),
+
+  // NOTE(lsh): add for qingling
+  // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+  setActiveExtUserProfile: async (id: string | null) => {
+    const { activeAgentId, internal_refreshAgentConfig } = get();
+    if (!activeAgentId) return;
+
+    await agentService.setAgentExtUserProfile(activeAgentId, id);
+
+    await internal_refreshAgentConfig(get().activeId);
+  },
+
   /* eslint-disable sort-keys-fix/sort-keys-fix */
 
   internal_dispatchAgentMap: (id, config, actions) => {
