@@ -300,5 +300,9 @@
       "videoSizeExceeded": "影片檔案大小不能超過 20MB，當前檔案大小為 {{actualSize}}"
     }
   },
+  "userProfile": {
+    "clearProfile": "關閉用戶畫像",
+    "title": "用戶畫像"
+  },
   "zenMode": "專注模式"
 }

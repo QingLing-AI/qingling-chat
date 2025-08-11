@@ -15,14 +15,6 @@ export interface CreateUserProfileParams {
   profile: string;
 }
 
-export interface UserProfileListItem {
-  createdAt: Date;
-  id: string;
-  name: string;
-  profile: string;
-  updatedAt: Date;
-}
-
 export enum SortType {
   Asc = 'asc',
   Desc = 'desc',

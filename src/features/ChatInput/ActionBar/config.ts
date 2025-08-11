@@ -10,6 +10,7 @@ import { MainToken, PortalToken } from './Token';
 import Tools from './Tools';
 import Typo from './Typo';
 import Upload from './Upload';
+import UserProfile from './UserProfile';
 
 export const actionMap = {
   clear: Clear,
@@ -26,6 +27,7 @@ export const actionMap = {
   temperature: Params,
   tools: Tools,
   typo: Typo,
+  userProfile: UserProfile,
 } as const;
 
 export type ActionKey = keyof typeof actionMap;
