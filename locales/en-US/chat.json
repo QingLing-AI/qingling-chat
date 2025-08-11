@@ -295,5 +295,9 @@
       "videoSizeExceeded": "Video file size must not exceed 20MB. Current file size is {{actualSize}}."
     }
   },
+  "userProfile": {
+    "clearProfile": "Close User Profile",
+    "title": "User Profile"
+  },
   "zenMode": "Zen Mode"
 }

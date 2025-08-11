@@ -4,7 +4,7 @@ import { PlusIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Center, Flexbox } from 'react-layout-kit';
 
-import { useCreateNewModal } from '../CreateNew';
+import { useCreateNewModal } from './ProfileForm';
 
 const ICON_SIZE = 80;
 

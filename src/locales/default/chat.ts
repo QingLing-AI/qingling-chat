@@ -299,5 +299,9 @@ export default {
       videoSizeExceeded: '视频文件大小不能超过 20MB，当前文件大小为 {{actualSize}}',
     },
   },
+  userProfile: {
+    clearProfile: '关闭用户画像',
+    title: '用户画像',
+  },
   zenMode: '专注模式',
 };
