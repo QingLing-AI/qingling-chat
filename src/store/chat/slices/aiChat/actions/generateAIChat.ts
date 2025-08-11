@@ -31,7 +31,8 @@ import { WebBrowsingManifest } from '@/tools/web-browsing';
 import { Action, setNamespace } from '@/utils/storeDebug';
 
 import { chatSelectors, topicSelectors } from '../../../selectors';
-import { userProfilePrompts } from '@/prompts/ext';
+import { dateTimePrompts, userProfilePrompts, } from '@/prompts/ext';
+import { ChatMessage } from 'langfuse-core';
 
 const n = setNamespace('ai');
 
@@ -363,15 +364,19 @@ export const generateAIChat: StateCreator<
     }
 
     if (isQinglingCustomized) {
+      const prevMsg = messages.pop() as UIChatMessage;
+
+      // 1. add the date time prompt to the previous message
+      prevMsg.content = (prevMsg.content + '\n\n' + dateTimePrompts()).trim()
+
+      // 2. get the user profile
       const userProfile = extUserProfileSelectors.currentAgentExtUserProfile(getAgentStoreState())
       if (userProfile) {
-        const prevMsg = messages.pop() as UIChatMessage;
         const userProfileContext = userProfilePrompts(userProfile);
-        messages.push({
-          ...prevMsg,
-          content: (prevMsg.content + '\n\n' + userProfileContext).trim(),
-        });
+        prevMsg.content = (prevMsg.content + '\n\n' + userProfileContext).trim()
       }
+
+      messages.push(prevMsg);
     }
 
     // 2. Add an empty message to place the AI response

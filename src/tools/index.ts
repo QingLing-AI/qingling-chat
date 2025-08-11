@@ -5,7 +5,6 @@ import { isQinglingCustomized } from '@/const/branding';
 
 import { ArtifactsManifest } from './artifacts';
 import { CodeInterpreterManifest } from './code-interpreter';
-import { CurrentTimeManifest } from './current-time';
 import { DalleManifest } from './dalle';
 import { LocalSystemManifest } from './local-system';
 import { WebBrowsingManifest } from './web-browsing';
@@ -39,14 +38,4 @@ export const builtinTools: LobeBuiltinTool[] = [
     manifest: CodeInterpreterManifest,
     type: 'builtin',
   },
-  ...(isQinglingCustomized
-    ? [
-        {
-          hidden: true,
-          identifier: CurrentTimeManifest.identifier,
-          manifest: CurrentTimeManifest,
-          type: 'builtin',
-        } as LobeBuiltinTool,
-      ]
-    : []),
 ];
