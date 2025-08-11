@@ -6,6 +6,7 @@ import { Suspense, memo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
+import { isQinglingCustomized } from '@/const/branding'
 import { type ActionKeys, ChatInputProvider, DesktopChatInput } from '@/features/ChatInput';
 import WideScreenContainer from '@/features/Conversation/components/WideScreenContainer';
 import { useChatStore } from '@/store/chat';
@@ -14,12 +15,11 @@ import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfi
 import { useUserStore } from '@/store/user';
 import { preferenceSelectors, settingsSelectors } from '@/store/user/selectors';
 import { HotkeyEnum, KeyEnum } from '@/types/hotkey';
-import { appEnv } from '@/envs/app'
 
 import { useSend } from '../useSend';
 import MessageFromUrl from './MessageFromUrl';
 
-const leftActions: ActionKeys[] = appEnv.NEXT_PUBLIC_QINGLING_CUSTOMIZED ? [
+const leftActions: ActionKeys[] = isQinglingCustomized ? [
   'model',
   'search',
   'typo',
