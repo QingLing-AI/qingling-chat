@@ -2,6 +2,7 @@ import { LLMParams } from '../../../model-bank/src/types/aiModel';
 import { FileItem } from '../files';
 import { KnowledgeBaseItem } from '../knowledgeBase';
 import { FewShots } from '../llm';
+import { UserProfileItem } from '../ext/userProfile';
 import { LobeAgentChatConfig } from './chatConfig';
 
 export type TTSServer = 'openai' | 'edge' | 'microsoft';
@@ -64,6 +65,13 @@ export interface LobeAgentConfig {
    * 语音服务
    */
   tts: LobeAgentTTSConfig;
+
+  /**
+   * NOTE(lsh): add for qingling
+   * 用户画像
+   */
+  // eslint-disable-next-line typescript-sort-keys/interface
+  extUserProfile?: UserProfileItem
 }
 
 export type LobeAgentConfigKeys =
