@@ -291,5 +291,9 @@
       }
     }
   },
+  "userProfile": {
+    "clearProfile": "Close User Profile",
+    "title": "User Profile"
+  },
   "zenMode": "Zen Mode"
 }
