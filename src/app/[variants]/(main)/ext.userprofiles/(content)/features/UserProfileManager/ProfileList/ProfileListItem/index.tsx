@@ -9,7 +9,7 @@ import { memo } from 'react';
 // import { useTranslation } from 'react-i18next';
 import { Center, Flexbox } from 'react-layout-kit';
 
-import { UserProfileListItem } from '@/types/ext/userProfile';
+import { UserProfileItem } from '@/types/ext/userProfile';
 import { Tooltip } from '@lobehub/ui';
 import DropdownMenu from './DropdownMenu';
 
@@ -70,23 +70,27 @@ const useStyles = createStyles(({ css, token, cx, isDarkMode }) => {
   };
 });
 
-interface ProfileRenderItemProps extends UserProfileListItem {
+interface ProfileRenderItemProps {
   index: number;
   onSelectedChange: (id: string, selected: boolean) => void;
   selected?: boolean;
+  userProfile: UserProfileItem;
 }
 
 const ProfileRenderItem = memo<ProfileRenderItemProps>(
   ({
-    id,
-    name,
-    createdAt,
-    profile,
+    userProfile,
     selected,
     onSelectedChange,
   }) => {
     // const { t } = useTranslation('ext.userProfile');
     const { styles, cx } = useStyles();
+    const {
+      id,
+      name,
+      createdAt,
+      profile
+    } = userProfile;
     // const router = useRouter();
 
     const displayTime =
@@ -140,7 +144,7 @@ const ProfileRenderItem = memo<ProfileRenderItemProps>(
             }}
           >
             <div className={styles.hover}>
-              <DropdownMenu id={id} name={name} />
+              <DropdownMenu userProfile={userProfile} />
             </div>
           </Flexbox>
         </Flexbox>

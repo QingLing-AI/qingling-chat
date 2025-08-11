@@ -19,6 +19,7 @@
   },
   "createNew": {
     "confirm": "New",
+    "editTitle": "Edit User Profile",
     "formTitle": "Basic Information",
     "name": {
       "placeholder": "User Name",
@@ -28,6 +29,7 @@
       "placeholder": "User Profile",
       "required": "Please enter user profile"
     },
+    "save": "Save",
     "title": "New User Profile"
   },
   "emptyStatus": {

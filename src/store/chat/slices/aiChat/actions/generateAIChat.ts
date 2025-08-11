@@ -7,12 +7,13 @@ import { produce } from 'immer';
 import { template } from 'lodash-es';
 import { StateCreator } from 'zustand/vanilla';
 
+import { isQinglingCustomized } from '@/const/branding';
 import { LOADING_FLAT, MESSAGE_CANCEL_FLAT } from '@/const/message';
 import { isDesktop, isServerMode } from '@/const/version';
 import { chatService } from '@/services/chat';
 import { messageService } from '@/services/message';
 import { useAgentStore } from '@/store/agent';
-import { agentChatConfigSelectors, agentSelectors } from '@/store/agent/selectors';
+import { agentChatConfigSelectors, agentSelectors, extUserProfileSelectors } from '@/store/agent/selectors';
 import { getAgentStoreState } from '@/store/agent/store';
 import { aiModelSelectors, aiProviderSelectors } from '@/store/aiInfra';
 import { getAiInfraStoreState } from '@/store/aiInfra/store';
@@ -28,6 +29,7 @@ import { MessageSemanticSearchChunk } from '@/types/rag';
 import { Action, setNamespace } from '@/utils/storeDebug';
 
 import { chatSelectors, topicSelectors } from '../../../selectors';
+import { userProfilePrompts } from '@/prompts/ext';
 
 const n = setNamespace('ai');
 
@@ -352,6 +354,18 @@ export const generateAIChat: StateCreator<
       });
 
       fileChunks = chunks.map((c) => ({ id: c.id, similarity: c.similarity }));
+    }
+
+    if (isQinglingCustomized) {
+      const userProfile = extUserProfileSelectors.currentAgentExtUserProfile(getAgentStoreState())
+      if (userProfile) {
+        const prevMsg = messages.pop() as ChatMessage;
+        const userProfileContext = userProfilePrompts(userProfile);
+        messages.push({
+          ...prevMsg,
+          content: (prevMsg.content + '\n\n' + userProfileContext).trim(),
+        });
+      }
     }
 
     // 2. Add an empty message to place the AI response
