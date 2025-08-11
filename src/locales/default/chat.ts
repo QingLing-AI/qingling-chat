@@ -279,5 +279,9 @@ export default {
       },
     },
   },
+  userProfile: {
+    clearProfile: '关闭用户画像',
+    title: '用户画像',
+  },
   zenMode: '专注模式',
 };

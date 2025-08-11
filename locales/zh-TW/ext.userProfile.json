@@ -17,9 +17,9 @@
       "selectedCount": "已選 {{count}} 項"
     }
   },
-  "_comment": "This is a comment",
   "createNew": {
     "confirm": "新建",
+    "editTitle": "編輯用戶畫像",
     "formTitle": "基本信息",
     "name": {
       "placeholder": "用戶名稱",
@@ -29,6 +29,7 @@
       "placeholder": "用戶簡介",
       "required": "請填寫用戶簡介"
     },
+    "save": "保存",
     "title": "新建用戶畫像"
   },
   "emptyStatus": {
@@ -37,6 +38,5 @@
     },
     "title": "尚未建立任何用戶資料"
   },
-  "title": "用戶畫像",
-  "translation": {}
+  "title": "用戶畫像"
 }

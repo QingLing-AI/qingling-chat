@@ -8,6 +8,13 @@
       "when": 1754642942137,
       "tag": "0000_add_q_user_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1754835651896,
+      "tag": "0001_add_agent_q_user_profiles",
+      "breakpoints": true
     }
   ]
 }

@@ -6,7 +6,7 @@ import { Flexbox } from 'react-layout-kit';
 import { useUserProfileStore } from '@/store/ext/userProfile';
 
 import MultiSelectActions, { MultiSelectActionType } from './MultiSelectActions';
-import { useCreateNewModal } from '../../CreateNew';
+import { useCreateNewModal } from '../ProfileForm';
 
 const useStyles = createStyles(({ css, token, isDarkMode }) => ({
   container: css`
