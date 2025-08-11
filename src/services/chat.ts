@@ -16,7 +16,6 @@ import { INBOX_GUIDE_SYSTEMROLE } from '@/const/guide';
 import { INBOX_SESSION_ID } from '@/const/session';
 import { DEFAULT_AGENT_CONFIG } from '@/const/settings';
 import { isDeprecatedEdition, isDesktop, isServerMode } from '@/const/version';
-import { isQinglingCustomized } from '@/const/branding';
 import { getAgentStoreState } from '@/store/agent';
 import { agentChatConfigSelectors } from '@/store/agent/selectors';
 import { aiModelSelectors, aiProviderSelectors, getAiInfraStoreState } from '@/store/aiInfra';
@@ -32,7 +31,6 @@ import {
   userGeneralSettingsSelectors,
   userProfileSelectors,
 } from '@/store/user/selectors';
-import { CurrentTimeManifest } from '@/tools/current-time';
 import { WebBrowsingManifest } from '@/tools/web-browsing';
 import { WorkingModel } from '@/types/agent';
 import { ChatImageItem, ChatMessage, MessageToolCall } from '@/types/message';
@@ -209,11 +207,6 @@ class ChatService {
 
     if (useApplicationBuiltinSearchTool) {
       pluginIds.push(WebBrowsingManifest.identifier);
-    }
-
-    // NOTE(lsh): if the model is qingling customized, we need to add the qingling-current-time-assistant to the pluginIds
-    if (isQinglingCustomized) {
-      pluginIds.push(CurrentTimeManifest.identifier);
     }
 
     // ============  1. preprocess placeholder variables   ============ //
