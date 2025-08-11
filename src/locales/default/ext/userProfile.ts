@@ -19,6 +19,7 @@ export default {
   },
   createNew: {
     confirm: '新建',
+    editTitle: '编辑用户画像',
     formTitle: '基本信息',
     name: {
       placeholder: '用户名称',
@@ -28,6 +29,7 @@ export default {
       placeholder: '用户简介',
       required: '请填写用户简介',
     },
+    save: '保存',
     title: '新建用户画像',
   },
   emptyStatus: {
