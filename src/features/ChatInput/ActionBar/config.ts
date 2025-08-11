@@ -8,6 +8,7 @@ import Search from './Search';
 import { MainToken, PortalToken } from './Token';
 import Tools from './Tools';
 import Upload from './Upload';
+import UserProfile from './UserProfile';
 
 export const actionMap = {
   clear: Clear,
@@ -22,6 +23,7 @@ export const actionMap = {
   stt: STT,
   temperature: Params,
   tools: Tools,
+  userProfile: UserProfile,
 } as const;
 
 export type ActionKeys = keyof typeof actionMap;

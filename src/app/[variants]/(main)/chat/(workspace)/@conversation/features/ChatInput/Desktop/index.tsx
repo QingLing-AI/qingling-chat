@@ -33,6 +33,7 @@ const qinglingLeftActions: ActionKeys[] = [
   'stt',
   'tools',
   // 'mainToken',
+  'userProfile'
 ];
 
 const rightActions = ['clear'] as ActionKeys[];

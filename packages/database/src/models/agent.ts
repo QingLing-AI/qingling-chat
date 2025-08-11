@@ -8,7 +8,11 @@ import {
   files,
   knowledgeBases,
 } from '../schemas';
+
+import { qAgentsUserProfiles, qUserProfiles } from '@/database/schemas/ext';
+
 import { LobeChatDatabase } from '../type';
+import { UserProfileItem } from '@/types/ext/userProfile'
 
 export class AgentModel {
   private userId: string;
@@ -23,8 +27,9 @@ export class AgentModel {
     const agent = await this.db.query.agents.findFirst({ where: eq(agents.id, id) });
 
     const knowledge = await this.getAgentAssignedKnowledge(id);
+    const extUserProfile = await this.getAgentExtUserProfile(id);
 
-    return { ...agent, ...knowledge };
+    return { ...agent, ...knowledge, extUserProfile };
   };
 
   getAgentAssignedKnowledge = async (id: string) => {
@@ -105,6 +110,35 @@ export class AgentModel {
         ),
       );
   };
+
+  setAgentExtUserProfile = async (agentId: string, profileId: string | null) => {
+    return this.db
+      .insert(qAgentsUserProfiles)
+      .values({
+        agentId,
+        userId: this.userId,
+        userProfileId: profileId
+      })
+      .onConflictDoUpdate({
+        set: { userProfileId: profileId },
+        target: [qAgentsUserProfiles.agentId, qAgentsUserProfiles.userId],
+      });
+  };
+
+  getAgentExtUserProfile = async (agentId: string): Promise<UserProfileItem | null> => {
+    const result = await this.db
+      .select({ qUserProfiles })
+      .from(qAgentsUserProfiles)
+      .where(and(
+        eq(qAgentsUserProfiles.agentId, agentId),
+        eq(qAgentsUserProfiles.userId, this.userId)
+      ))
+      .leftJoin(qUserProfiles, eq(qUserProfiles.id, qAgentsUserProfiles.userProfileId))
+      .limit(1);
+
+    return result.length ? result[0].qUserProfiles : null;
+  };
+
 
   createAgentFiles = async (agentId: string, fileIds: string[], enabled: boolean = true) => {
     // Exclude the fileIds that already exist in agentsFiles, and then insert them

@@ -118,7 +118,7 @@ const ProfileList = memo<ProfileListProps>(({ }) => {
                 });
               }}
               selected={selectFileIds.includes(item.id)}
-              {...item}
+              userProfile={item}
             />
           )}
           style={{ flex: 1 }}
