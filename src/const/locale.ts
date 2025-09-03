@@ -1,4 +1,4 @@
-import { isQinglingCustomized } from './branding';
+import { isQinglingCustomized } from '@/const/branding';
 import { supportLocales } from '@/locales/resources';
 
 export const DEFAULT_LANG = isQinglingCustomized ? 'zh-CN' : 'en-US';
