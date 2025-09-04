@@ -8,7 +8,7 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
-import { BRANDING_EMAIL, BRANDING_NAME, SOCIAL_URL } from '@/const/branding';
+import { BRANDING_EMAIL, BRANDING_NAME, SOCIAL_URL, isQinglingCustomized } from '@/const/branding';
 import { BLOG, OFFICIAL_SITE, PRIVACY_URL, TERMS_URL, mailTo } from '@/const/url';
 
 import AboutList from './features/AboutList';
@@ -129,7 +129,7 @@ const Page = memo<{ mobile?: boolean }>(({ mobile }) => {
           }
         </Flexbox>
       </Form.Group>
-      <Analytics />
+      {isQinglingCustomized || <Analytics />}
     </>
   );
 });
