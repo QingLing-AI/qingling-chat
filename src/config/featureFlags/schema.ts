@@ -87,7 +87,6 @@ export const DEFAULT_FEATURE_FLAGS: IFeatureFlags = {
 };
 
 export const QINGLING_FEATURE_FLAGS: IFeatureFlags = {
-  webrtc_sync: false,
   pin_list: false,
 
   language_model_settings: false,
