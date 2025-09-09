@@ -15,10 +15,12 @@ import { t } from 'i18next';
 import { produce } from 'immer';
 import { StateCreator } from 'zustand/vanilla';
 
+import { isQinglingCustomized } from '@/const/branding';
 import { aiChatService } from '@/services/aiChat';
 import { chatService } from '@/services/chat';
 import { messageService } from '@/services/message';
 import { getAgentStoreState } from '@/store/agent';
+import { extUserProfileSelectors } from '@/store/agent/selectors';
 import { agentChatConfigSelectors, agentSelectors } from '@/store/agent/slices/chat';
 import { aiModelSelectors, aiProviderSelectors, getAiInfraStoreState } from '@/store/aiInfra';
 import { MainSendMessageOperation } from '@/store/chat/slices/aiChat/initialState';
@@ -29,6 +31,7 @@ import { setNamespace } from '@/utils/storeDebug';
 
 import { chatSelectors, topicSelectors } from '../../../selectors';
 import { messageMapKey } from '../../../utils/messageMapKey';
+import { dateTimePrompts, userProfilePrompts } from '@/prompts/ext';
 
 const n = setNamespace('ai');
 
@@ -146,9 +149,9 @@ export const generateAIChatV2: StateCreator<
           threadId: activeThreadId,
           newTopic: !activeTopicId
             ? {
-                topicMessageIds: messages.map((m) => m.id),
-                title: t('defaultTitle', { ns: 'topic' }),
-              }
+              topicMessageIds: messages.map((m) => m.id),
+              title: t('defaultTitle', { ns: 'topic' }),
+            }
             : undefined,
           sessionId: activeId === INBOX_SESSION_ID ? undefined : activeId,
           newAssistantMessage: { model, provider: provider! },
@@ -338,6 +341,22 @@ export const generateAIChatV2: StateCreator<
       if (fileChunks.length > 0) {
         await internal_updateMessageRAG(assistantId, { ragQueryId, fileChunks });
       }
+    }
+
+    if (isQinglingCustomized) {
+      const prevMsg = messages.pop() as ChatMessage;
+
+      // 1. add the date time prompt to the previous message
+      prevMsg.content = (prevMsg.content + '\n\n' + dateTimePrompts()).trim()
+
+      // 2. get the user profile
+      const userProfile = extUserProfileSelectors.currentAgentExtUserProfile(getAgentStoreState())
+      if (userProfile) {
+        const userProfileContext = userProfilePrompts(userProfile);
+        prevMsg.content = (prevMsg.content + '\n\n' + userProfileContext).trim()
+      }
+
+      messages.push(prevMsg);
     }
 
     // 3. place a search with the search working model if this model is not support tool use
