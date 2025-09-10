@@ -24,9 +24,9 @@ const leftActions: ActionKeys[] = isQinglingCustomized ? [
   'typo',
   'fileUpload',
   'knowledgeBase',
-  'tools',
+  'userProfile',
   '---',
-  [/* 'params', 'history',  */'stt', 'clear'],
+  [/* 'params', 'history',  */'tools', 'stt', 'clear'],
   // 'mainToken',
 ] : [
   'model',

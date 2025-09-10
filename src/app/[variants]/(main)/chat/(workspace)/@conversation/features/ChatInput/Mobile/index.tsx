@@ -21,9 +21,11 @@ import { useSend } from '../useSend';
 const leftActions: ActionKeys[] = isQinglingCustomized ? [
   'model',
   'search',
+  'fileUpload',
+  'knowledgeBase',
   'userProfile',
   '---',
-  [/* 'params', 'history',  */'fileUpload', 'knowledgeBase', 'tools', 'stt', 'clear'],
+  [/* 'params', 'history',  */'tools', 'stt', 'clear'],
   // 'mainToken',
 ] : [
   'model',
