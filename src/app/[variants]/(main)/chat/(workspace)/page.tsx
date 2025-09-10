@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import StructuredData from '@/components/StructuredData';
 import { serverFeatureFlags } from '@/config/featureFlags';
-import { BRANDING_NAME } from '@/const/branding';
+import { BRANDING_NAME, isQinglingCustomized } from '@/const/branding';
 import { isDesktop } from '@/const/version';
 import { ldModule } from '@/server/ld';
 import { metadataModule } from '@/server/metadata';
@@ -38,7 +38,7 @@ const Page = async (props: DynamicLayoutProps) => {
     <>
       <StructuredData ld={ld} />
       <PageTitle />
-      <TelemetryNotification mobile={isMobile} />
+      {!isQinglingCustomized && <TelemetryNotification mobile={isMobile} />}
       {!isDesktop && showChangelog && !hideDocs && !isMobile && (
         <Suspense>
           <Changelog />
