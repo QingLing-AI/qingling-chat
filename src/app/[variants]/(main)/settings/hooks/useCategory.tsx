@@ -15,6 +15,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { MenuProps } from '@/components/Menu';
+import { isQinglingCustomized } from '@/const/branding';
 import { isDeprecatedEdition, isDesktop } from '@/const/version';
 import { SettingsTabs } from '@/store/global/initialState';
 import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
@@ -22,7 +23,7 @@ import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfi
 export const useCategory = () => {
   const { t } = useTranslation('setting');
   const mobile = useServerConfigStore((s) => s.isMobile);
-  const { showLLM, enableSTT, /* hideDocs */ } = useServerConfigStore(featureFlagsSelectors);
+  const { showLLM, enableSTT, hideDocs } = useServerConfigStore(featureFlagsSelectors);
 
   const cateItems: MenuProps['items'] = useMemo(
     () =>
@@ -86,7 +87,7 @@ export const useCategory = () => {
           key: SettingsTabs.Storage,
           label: t('tab.storage'),
         },
-        {
+        (!hideDocs || isQinglingCustomized) && {
           icon: <Icon icon={Info} />,
           key: SettingsTabs.About,
           label: t('tab.about'),
