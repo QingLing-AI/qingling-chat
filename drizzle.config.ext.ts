@@ -23,6 +23,6 @@ export default {
   },
   dialect: 'postgresql',
   out: './packages/database/migrations/ext',
-  schema: './packages/database/schemas/ext',
+  schema: './packages/database/src/schemas/ext',
   strict: true,
 } satisfies Config;
