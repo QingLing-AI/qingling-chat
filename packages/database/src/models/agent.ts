@@ -9,6 +9,7 @@ import {
   knowledgeBases,
 } from '../schemas';
 
+import { isQinglingCustomized } from '@/const/branding';
 import { qAgentsUserProfiles, qUserProfiles } from '@/database/schemas/ext';
 
 import { LobeChatDatabase } from '../type';
@@ -27,9 +28,13 @@ export class AgentModel {
     const agent = await this.db.query.agents.findFirst({ where: eq(agents.id, id) });
 
     const knowledge = await this.getAgentAssignedKnowledge(id);
-    const extUserProfile = await this.getAgentExtUserProfile(id);
 
-    return { ...agent, ...knowledge, extUserProfile };
+    if (isQinglingCustomized) {
+      const extUserProfile = await this.getAgentExtUserProfile(id);
+      return { ...agent, ...knowledge, extUserProfile };
+    }
+
+    return { ...agent, ...knowledge };
   };
 
   getAgentAssignedKnowledge = async (id: string) => {
