@@ -9,7 +9,7 @@ import {
 import { timestamps } from '../_helpers';
 import { users } from '../user';
 import { agents } from '../agent';
-import { qUserProfiles } from './';
+import { qUserProfiles } from './userProfile';
 
 export const qAgentsUserProfiles = pgTable(
   'agents_q_user_profiles',
